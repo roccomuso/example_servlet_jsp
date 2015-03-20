@@ -1,7 +1,10 @@
-import javax.servlet.*;
-import javax.servlet.http.*;
+package profSessionCookie;
+
 import java.io.*;
 import java.util.*;
+import java.util.Map.Entry;
+import javax.servlet.*;
+import javax.servlet.http.*;
  
 public class eCommerce extends HttpServlet {
 
@@ -11,6 +14,7 @@ public class eCommerce extends HttpServlet {
     private String[] fileContent;
     private String dbg = "";
     
+    @Override
     public void init () {
 	BufferedReader br = null;
  
@@ -18,7 +22,7 @@ public class eCommerce extends HttpServlet {
  
 	    String sCurrentLine, elementi = "", sezione = "";
  
-	    br = new BufferedReader(new FileReader("/var/lib/tomcat7/webapps/20150316/other/ecommerce.txt"));
+	    br = new BufferedReader(new FileReader("C:/xampp/tomcat/webapps/esempi_prof/html_prof/ecommerce.txt"));
  
 	    while ((sCurrentLine = br.readLine()) != null) {
 		if (sCurrentLine.equals(""))
@@ -52,9 +56,9 @@ public class eCommerce extends HttpServlet {
 
     private void aggiungiCarrello(HttpServletRequest request, String sezione) {
 	HttpSession session = request.getSession(true);
-	ArrayList<String> carrello = (ArrayList<String>)session.getAttribute(sezione);
+	Map<String, Integer> carrello = (HashMap<String, Integer>)session.getAttribute(sezione);
 	if (carrello == null)
-	    carrello = new ArrayList<String>();
+	    carrello = new HashMap<String, Integer>();
 	// if (session.isNew())
 	//     carrello = new ArrayList<String>();
 	// else
@@ -62,8 +66,8 @@ public class eCommerce extends HttpServlet {
 	String[] compra;
 	if ((compra = request.getParameterValues("compra")) != null) {
 	    for (int i = 0; i < compra.length; i++)
-		if (!(carrello.contains(compra[i])))
-		    carrello.add(compra[i]);
+		carrello.put(compra[i], (carrello.containsKey(compra[i])) ? (int) (carrello.get(compra[i])) + 1 : 1); // aggiunge anche una quantità.
+
 	}
 	if (carrello.size() > 0)
 	    session.setAttribute(sezione, carrello);
@@ -73,16 +77,49 @@ public class eCommerce extends HttpServlet {
 	HttpSession session = request.getSession(true);
 	String[] sezioni_ar = sezioniStr.split(" ");
 	for (int i = 0; i < sezioni_ar.length; i++) {
-	    ArrayList<String> carrello = ((ArrayList<String>)session.getAttribute(sezioni_ar[i]));
+	    Map<String, Integer> carrello = ((HashMap<String, Integer>)session.getAttribute(sezioni_ar[i]));
 	    if (carrello == null)
 		continue;
-	    out.println("<p>I seguenti elementi della sezione " + sezioni_ar[i] + " sono gi&agrave; nel carrello:</p>\n<ul>");
-	    for (int j = 0; j < carrello.size(); j++)
-		out.println("<li>" + carrello.get(j) + "</li>\n");
-	    out.println("</ul>");
+	    if (!carrello.isEmpty()){ // questo perchè la cancellazione di un elemento lascia comunque una voce nei cookie
+            out.println("<p>- I seguenti elementi della sezione " + sezioni_ar[i] + " sono gi&agrave; nel carrello:</p>\n<ul>");
+	     
+                for (Entry<String, Integer> elem: carrello.entrySet())
+                    out.println("<li>"+elem.getKey()+" - quantità: "+elem.getValue()+"  &nbsp  - [<a href='"+request.getRequestURI()+"?cancella="+elem.getKey()+"'>x</a>]</li>\n");
+            out.println("</ul>");
+            }
+	    
 	}
     }
     
+    private void cancellaDalCarrello(HttpServletRequest request, HttpServletResponse response){
+    
+        String da_cancellare = request.getParameter("cancella");
+        
+
+        HttpSession session = request.getSession(true);
+        
+        String[] sezioni_ar = sezioniStr.split(" ");
+        
+	for (int i = 0; i < sezioni_ar.length; i++) {
+            boolean modifica = false;
+	    Map<String, Integer> carrello = ((HashMap<String, Integer>)session.getAttribute(sezioni_ar[i]));
+	    if (carrello == null)
+		continue;
+            Map<String, Integer> nuovo_carrello = carrello;
+            for (Iterator<Entry<String, Integer>> it = carrello.entrySet().iterator(); it.hasNext();) {
+                Entry<String, Integer> elem = it.next();
+                if (elem.getKey().equals(da_cancellare)){ // la chiave contiene il nome dell'oggetto, la value la quantità nel carrello
+                    nuovo_carrello.remove(da_cancellare);
+                    modifica = true;
+                    
+                }
+            }
+	   if (modifica) session.setAttribute(sezioni_ar[i], nuovo_carrello);
+	}
+        
+    }
+    
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException
     {
@@ -93,7 +130,13 @@ public class eCommerce extends HttpServlet {
 	    out.close();
 	}
 	else {
-	    String sezione, compraStr = "";
+            
+            String cancella; // Per cancellare elementi dal carrello.
+            if ((request.getParameter("cancella")) != null){
+                cancellaDalCarrello(request, response);      
+            }
+            
+	    String sezione;
 	    if ((sezione = request.getParameter("sezione")) == null) {
 		response.setContentType( "text/html" );
 		PrintWriter out = response.getWriter();
