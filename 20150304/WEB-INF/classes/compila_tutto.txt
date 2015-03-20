@@ -1,0 +1,10 @@
+echo javac -cp /usr/share/java/tomcat-servlet-api-3.0.jar -Xlint:unchecked slide140.java 
+javac -cp /usr/share/java/tomcat-servlet-api-3.0.jar -Xlint:unchecked slide140.java 
+echo javac -cp /usr/share/java/tomcat-servlet-api-3.0.jar slide97.java 
+javac -cp /usr/share/java/tomcat-servlet-api-3.0.jar slide97.java 
+echo javac -cp /usr/share/java/tomcat-servlet-api-3.0.jar slide126.java 
+javac -cp /usr/share/java/tomcat-servlet-api-3.0.jar slide126.java 
+echo javac -cp /usr/share/java/tomcat-servlet-api-3.0.jar slide117.java 
+javac -cp /usr/share/java/tomcat-servlet-api-3.0.jar slide117.java 
+echo javac -cp /usr/share/java/tomcat-servlet-api-3.0.jar slide110.java 
+javac -cp /usr/share/java/tomcat-servlet-api-3.0.jar slide110.java 

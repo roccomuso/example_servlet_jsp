@@ -1,0 +1,69 @@
+
+<web-app>
+  <!-- General description of your Web application -->
+  <display-name>
+    Lezione del 04/03/2015
+  </display-name>
+  <description>
+    Esempi di servlet per la lezione del 04/03/2015
+  </description>
+  <!-- Servlet definitions -->
+  <servlet>
+    <servlet-name>A_servlet_di_saluto</servlet-name>
+    <description>
+      Una servlet che gestisce le richieste di GET
+    </description>
+    <servlet-class>slide97</servlet-class>
+  </servlet>
+  <!--
+  <servlet>
+    <servlet-name>get_welcome_servlet</servlet-name>
+    <description>
+      Una servlet che gestisce le richieste di GET, con form
+    </description>
+    <servlet-class>slide110</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>post_welcome_servlet</servlet-name>
+    <description>
+      Una servlet che gestisce le richieste di POST, con form
+    </description>
+    <servlet-class>slide117</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>redirect_servlet</servlet-name>
+    <description>
+      Una servlet che redirige
+    </description>
+    <servlet-class>slide126</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>cookie_servlet</servlet-name>
+    <description>
+      Una servlet che usa Cookies
+    </description>
+    <servlet-class>slide140</servlet-class>
+  </servlet>
+-->
+  <!-- Servlet mappings -->
+  <servlet-mapping>
+    <servlet-name>A_servlet_di_saluto</servlet-name>
+    <url-pattern>/nonesiste/alias_servlet_di_saluto</url-pattern>
+  </servlet-mapping>
+  <!--<servlet-mapping>
+    <servlet-name>get_welcome_servlet</servlet-name>
+    <url-pattern>/a_welcome</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>post_welcome_servlet</servlet-name>
+    <url-pattern>/a_welcome_with_post</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>redirect_servlet</servlet-name>
+    <url-pattern>/redirect</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>cookie_servlet</servlet-name>
+    <url-pattern>/a_dir/cookies</url-pattern>
+  </servlet-mapping>-->
+</web-app>

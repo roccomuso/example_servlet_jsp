@@ -1,0 +1,16 @@
+_Libri
+La Divina Commedia
+Orlando Furioso
+Gerusalemme Liberata
+
+_Abbigliamento
+Pantaloni
+Maglietta
+Camicia
+Calzini
+
+_Calzature
+Scarpe
+Stivali
+Ciabatte
+Pantofole
