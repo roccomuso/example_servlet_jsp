@@ -31,6 +31,11 @@
     </description>
 
 
+	<context-param><!-- I parametri di contesto sono visibili all'intera web-app. Si specificano dentro i tag web-app -->
+		<param-name>email_rocco</param-name>
+        <param-value>rocco@hackerstribe.com</param-value>
+	</context-param>
+
     <!-- Define servlets that are included in the example application -->
 
 	
@@ -38,6 +43,12 @@
 		<servlet-name>Paperino</servlet-name>
 		<description>Servlet che gestisce le richieste GET</description>
 		<servlet-class>servletSaluto.ServletDiSaluto</servlet-class> <!-- servlet. indica la cartella, formato: cartella.classe -->
+		
+		<init-param> <!-- I parametri di servlet sono definiti e visibili all'interno di una servlet, quindi non dalle altre servlet della stessa web-app -->
+			<param-name>parametro_saluto</param-name>
+			<param-value>Esempio di Servlet GET e parametri da file web.xml</param-value>
+        </init-param>
+		
 	</servlet>
 	
     <servlet-mapping>
@@ -93,6 +104,19 @@
         <url-pattern>/AliasServletEncoding</url-pattern>
     </servlet-mapping>
     
+	
+    <servlet>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<description>Servlet d'esempio per il RequestDispatcher</description>
+		<servlet-class>servletDispatcher.ServletDispatcher</servlet-class> <!-- servlet. indica la cartella, formato: cartella.classe -->
+	</servlet>
+	
+    <servlet-mapping>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <url-pattern>/AliasServletDispatcher</url-pattern>
+    </servlet-mapping>
+    
+
 
   
 </web-app>
