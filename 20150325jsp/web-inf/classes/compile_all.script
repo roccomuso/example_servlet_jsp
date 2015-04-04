@@ -1,0 +1,6 @@
+echo javac -cp /usr/share/java/tomcat-servlet-api-3.0.jar eCommerce.java
+javac -cp /usr/share/java/tomcat-servlet-api-3.0.jar eCommerce.java
+echo javac -cp /usr/share/java/tomcat-servlet-api-3.0.jar slide210.java
+javac -cp /usr/share/java/tomcat-servlet-api-3.0.jar slide210.java
+echo javac test_conversion.java
+javac test_conversion.java

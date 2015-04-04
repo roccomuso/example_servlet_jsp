@@ -1,0 +1,42 @@
+<!DOCTYPE web-app PUBLIC
+"-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
+"http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+<web-app>
+  <!-- General description of your Web application -->
+  <display-name>
+    Lezione del 18/03/2015
+  </display-name>
+  <description>
+    Esempi di servlet per la lezione del 18/03/2015
+  </description>
+  <context-param>
+  <param-name>Ciao</param-name>
+  <param-value>value</param-value>
+  </context-param>
+  <servlet>
+  <init-param>
+  <param-name>filePath</param-name>
+  <param-value>/var/lib/tomcat7/webapps/20150323/other/ecommerce.txt</param-value>
+  </init-param>
+    <servlet-name>e_commerce</servlet-name>
+    <description>
+      Una servlet che implementa un mini-sito di e-commerce
+    </description>
+    <servlet-class>eCommerce</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>e_commerce</servlet-name>
+    <url-pattern>/e_commerce.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>redirezionare</servlet-name>
+    <description>
+      Una servlet che testa i vari tipi di redirezionamento
+    </description>
+    <servlet-class>slide210</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>redirezionare</servlet-name>
+    <url-pattern>/redirezionare.html</url-pattern>
+  </servlet-mapping>
+</web-app>

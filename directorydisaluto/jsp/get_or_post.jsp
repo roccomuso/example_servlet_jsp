@@ -19,6 +19,14 @@
             <%
                 }
             %>
+			
+			<!-- Commento: <\%-- --%> -->
+			<!-- Scriptlet: <\% %> -->
+			<!-- Espressioni: <\%= %> -->
+			<!-- Dichiarazioni: <\%! %> -->
+			<!-- Azioni predefinite: jsp:include, jsp:forward, jsp:setProperty, jsp:getProperty, jsp:useBean  -->
+			<!-- Direttive: sono solo 3, page, include, taglib: <\%@ %> -->
+			
         </p>
     </body>
 </html>
