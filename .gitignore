@@ -3,3 +3,5 @@ manager/
 host-manager/
 examples/
 docs/
+/jsp_pages/nbproject/private/
+/jsp_pages/build/

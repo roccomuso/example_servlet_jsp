@@ -1,0 +1,33 @@
+<!DOCTYPE web-app PUBLIC
+"-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
+"http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+<web-app>
+  <display-name>
+    Lezione del 22/04/2015
+  </display-name>
+  <description>
+    Esempi di JavaBeans
+  </description>
+  <servlet>
+    <servlet-name>passBean</servlet-name>
+    <description>
+      Una servlet che passa un bean ad una pagina JSP
+    </description>
+    <servlet-class>passBean</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>passBean</servlet-name>
+    <url-pattern>/passBean.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>passBean2</servlet-name>
+    <description>
+      Una servlet che passa un bean ad una pagina JSP
+    </description>
+    <servlet-class>passBean</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>passBean2</servlet-name>
+    <url-pattern>/altro/passBean.html</url-pattern>
+  </servlet-mapping>
+</web-app>
