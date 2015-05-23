@@ -5,3 +5,6 @@ examples/
 docs/
 /jsp_pages/nbproject/private/
 /jsp_pages/build/
+/MyJSP/nbproject/private/
+/MyJSP/build/
+/MyJSP/dist/
