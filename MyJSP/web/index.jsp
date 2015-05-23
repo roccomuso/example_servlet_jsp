@@ -16,7 +16,21 @@
         out.print("ciaoooo");
         // praticamente già è definita in JSP uno stream di output verso il client, chiamato out.
         // out è infatti un oggetto implicito. Vedere slide 270.
-        // Gli oggetti impliciti non sono definiti all'interno delle direttive: <\%! %\>
+        // Gli oggetti impliciti non sono definiti all'interno delle dichiarazioni <\%! %\>
+        
+        /*
+            Altri oggetti impliciti:
+                - application
+                - config
+                - exception
+                - out
+                - page
+                - pageContext
+                - request
+                - response
+                - session
+                
+        */
         %>
         
         		<!-- Commento: <\%-- --%> -->
