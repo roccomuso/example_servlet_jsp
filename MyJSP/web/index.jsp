@@ -49,6 +49,11 @@
         si comportano allo stesso modo. Come l'include nel PHP.
         --%>               
        
+        Ecco un esempio di espressione: Benvenuto, <%= request.getParameter("nome") %>
+        
+        <%
+            out.println(getServletContext().getInitParameter("parametro")); // parametro preso direttamente dal deployment descriptor (web.xml)
+        %>
         
         
     </body>

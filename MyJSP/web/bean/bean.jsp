@@ -17,7 +17,7 @@ public void jspInit(){ // Funzione di inizializzazione JSP. Richiamata al carica
 
 }
 %>
-
+<!-- Un modo possibile per condividere dati, oltre all'uso del Dispatcher con setAttribute, si possono usare i bean, con il contesto di visibilità 'scope' opportuno. E dunque richiamare l'istanza bean con l'id scelto dove più ci aggrada (gli scriptlet hanno visibilità dei bean solitamente.).. -->
 <jsp:useBean id="istanzaBean" class="javaBean.JavaBean" scope="session" />
 <!-- ogni parametro viene passato al Bean setter corrispondente. -->
 <jsp:setProperty name="istanzaBean" property="*" />
@@ -41,9 +41,19 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response, 
 
 <!--
 <%--
+
 Nome: <jsp:getProperty name="istanzaBean" property="nome" /><br/>
 Cognome: <jsp:getProperty name="istanzaBean" property="cognome" /><br/>
 Email: <jsp:getProperty name="istanzaBean" property="email" /><br/>
+<%= istanzaBean.getEmail() %>
+<% istanzaBean.setEmail("indirizzo@email.it"); %>
+
+<jsp:setProperty name="istanzaBean" property="nome" value="<%= request.getParameter("parametro") %>" /> passare un valore numerico può essere problematico! perchè bisogna fare il casting.
+Motivo per cui invece di assegnare direttamente value="..request.getPara...", si usa param='parametro', e la conversione è fatta automaticamente!
+
+Addirittura mettendo in property il simbolo * asterisco, si effettua un mapping con conversione diretta, fra parametri passati e attributi del Bean.
+<jsp:setProperty name="istanzaBean" property="*" />
+
 --%>
 -->
 

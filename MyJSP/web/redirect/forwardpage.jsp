@@ -15,8 +15,10 @@ public void doGet(HttpServletRequest request, HttpServletResponse response, JspW
             response.sendRedirect("destinazione.jsp"); // Non viene passata la richiesta ad altro script. Semplice redirect.
         }
         else if (modalita.equals("dispatcher")){
+            //request.setAttribute("chiave", oggetto); // Per condividere dati e valori, si usa il setAttribute() e getAttribute().
             RequestDispatcher dispatcher = request.getRequestDispatcher("destinazione.jsp");
             dispatcher.forward(request, response);
+            // chi riceve userà request.getAttribute("chiave"); per recuperare l'oggetto passato. Appunto si possono passare anche oggetti!
         }else if(modalita.equals("azione_predefinita")){
             out.println("<font color='red'>Spiacente, l'azione predefinita non può essere invocata in modo procedurale.</font>");
             %>
