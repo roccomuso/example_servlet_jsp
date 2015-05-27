@@ -40,6 +40,7 @@ public class ServletSession extends HttpServlet {
             if (cookie != null)
                 for (int i=0; i < cookie.length; i++) {
                     cookie[i] = new Cookie(cookie[i].getName(), ""); // resettiamo i cookie.
+                    //cookie[i].setMaxAge(0); // dovrebbe essere ancora più efficace, settando a 0, viene subito eliminato dal client.
                     response.addCookie(cookie[i]);
             }
             

@@ -12,6 +12,18 @@
         
         <%
         
+       /*
+       // Metodi chiamati dal servlet container durante il normale ciclo di vita. Utili per l'inizializzazione di dati, connessioni a DB e la chiusura rispettivamente.
+       
+       public void jspInit(){ // oppure semplicemente init()
+           ...
+       }
+       
+       public void jspDestroy(){
+           ...
+       }
+            
+       */
         
         out.print("ciaoooo");
         // praticamente già è definita in JSP uno stream di output verso il client, chiamato out.
