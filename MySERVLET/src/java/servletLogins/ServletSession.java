@@ -23,7 +23,7 @@ public class ServletSession extends HttpServlet {
     
     @Override
     public void init(){ // E' un metodo della Classe HttpServlet!! eseguito all'avvio.
-        utenti.put("Rocco", "password");
+        utenti.put("Rocco", "123456");
         utenti.put("Ilaria", "password2");
         utenti.put("admin", "admin");
         utenti.put("123456", "123456");
@@ -119,7 +119,7 @@ public class ServletSession extends HttpServlet {
               sessione.setAttribute("login", "OK");
               sessione.setAttribute("username", request.getParameter("username"));
               
-              mex = "Login avvenuto con successo. <a href='javascript:location.reload(true);'>Ricarica la pagina</a>!";
+              mex = "Login avvenuto con successo. <a href='./AliasLoginSession'>Ricarica la pagina</a>!";
           }else{
               //Credenziali errate.
               mex = "Password errata! <a href='./logins.html'>Riprova</a>";

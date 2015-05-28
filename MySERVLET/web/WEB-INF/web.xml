@@ -67,21 +67,32 @@
     
     <servlet>
                 <description>Servlet d'esempio per i Cookie</description>
-		<servlet-name>LoginServlet</servlet-name>
-		<servlet-class>servletCookie.ServletCookie</servlet-class> <!-- servlet. indica la cartella, formato: cartella.classe -->
-	</servlet>
+		<servlet-name>LoginServletCookie</servlet-name>
+		<servlet-class>servletLogins.ServletCookie</servlet-class> <!-- servlet. indica la cartella, formato: cartella.classe -->
+    </servlet>
 	
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/AliasServletLogin</url-pattern>
+        <servlet-name>LoginServletCookie</servlet-name>
+        <url-pattern>/AliasLoginCookie</url-pattern>
     </servlet-mapping>
     
-
+    
     <servlet>
-                <description>Servlet d'esempio per i Cookie</description>
+                <description>Servlet d'esempio per le Sessioni</description>
+		<servlet-name>LoginServletSession</servlet-name>
+		<servlet-class>servletLogins.ServletSession</servlet-class> <!-- servlet. indica la cartella, formato: cartella.classe -->
+    </servlet>
+	
+    <servlet-mapping>
+        <servlet-name>LoginServletSession</servlet-name>
+        <url-pattern>/AliasLoginSession</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+                <description>Servlet d'esempio per urlEncode</description>
 		<servlet-name>EncodingServlet</servlet-name>
 		<servlet-class>servletUrlEncode.ServletEncode</servlet-class> <!-- servlet. indica la cartella, formato: cartella.classe -->
-	</servlet>
+    </servlet>
 	
     <servlet-mapping>
         <servlet-name>EncodingServlet</servlet-name>
@@ -93,7 +104,7 @@
                 <description>Servlet d'esempio per il RequestDispatcher</description>
 		<servlet-name>DispatcherServlet</servlet-name>
 		<servlet-class>servletDispatcher.ServletDispatcher</servlet-class> <!-- servlet. indica la cartella, formato: cartella.classe -->
-	</servlet>
+    </servlet>
 	
     <servlet-mapping>
         <servlet-name>DispatcherServlet</servlet-name>

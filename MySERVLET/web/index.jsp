@@ -18,7 +18,7 @@
 
 <%
 
-File folder = new File("C:/xampp/tomcat/webapps/MySERVLET");
+File folder = new File("C:/xampp/tomcat/webapps/MySERVLET/web");
 File[] listOfFiles = folder.listFiles();
 
     for (int i = 0; i < listOfFiles.length; i++) {
