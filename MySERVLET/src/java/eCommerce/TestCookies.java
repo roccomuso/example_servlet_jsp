@@ -16,11 +16,17 @@ public class TestCookies extends HttpServlet {
 	    res.addCookie(cookie);
 	    res.sendRedirect(req.getRequestURI() + "?param=qualcosa");
 	}
-	else
-	    res.sendRedirect
-		(( req.getCookies() == null || req.getCookies().length == 0 ) ? "html_prof/failure.html" : "html_prof/success.html"
-		 );
+        else{
+            
+            String esito = ( req.getCookies() == null || req.getCookies().length == 0 ) ? "Failure" : "Success";
+        res.setContentType("text/html"); // Altrimenti non viene interpretato il codice html! apparirà come semplice testo!
+        PrintWriter out = res.getWriter();
+        out.print("<h3>"+esito+"</h3>");
+        
+	     // Stampiamo Success o Failure, se i cookie son attivi o meno.
     }
+    
+}
 
     public void doGet(HttpServletRequest req, HttpServletResponse res)
 	throws ServletException, IOException

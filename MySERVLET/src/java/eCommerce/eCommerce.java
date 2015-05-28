@@ -22,7 +22,7 @@ public class eCommerce extends HttpServlet {
  
 	    String sCurrentLine, elementi = "", sezione = "";
  
-	    br = new BufferedReader(new FileReader("C:/xampp/tomcat/webapps/esempi_prof/html_prof/ecommerce.txt"));
+	    br = new BufferedReader(new FileReader("C:\\xampp\\tomcat\\webapps\\MySERVLET\\src\\java\\eCommerce\\ecommerce.txt"));
  
 	    while ((sCurrentLine = br.readLine()) != null) {
 		if (sCurrentLine.equals(""))

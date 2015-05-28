@@ -5,15 +5,23 @@ import javax.servlet.http.*;
 import java.io.*;
 import java.util.*;
 
+// Stampiamo Success o Failure, in base al fatto che il client supporti i cookie (e il server le sessioni) o meno.
+
 public class TestCookiesSession extends HttpServlet {
 
-    private static final String successURI = "html_prof/success.html";
-    private static final String failureURI = "html_prof/failure.html";
+    
 
-    private void handleWrong(HttpServletRequest req, HttpServletResponse res)
+    private void handleWrong(HttpServletRequest req, HttpServletResponse res) // metodo non utilizzato
 	throws ServletException, IOException
     {
-	res.sendRedirect(req.isRequestedSessionIdFromURL() ? failureURI : successURI );
+	
+        res.setContentType("text/html"); // Altrimenti non viene interpretato il codice html! apparirà come semplice testo!
+        
+        String esito = (req.isRequestedSessionIdFromURL()) ? "Failure" : "Success";
+        
+        PrintWriter out = res.getWriter();
+        out.print("<h3>"+esito+"</h3>");
+        
     }
 
     private void handleCorrect(HttpServletRequest req, HttpServletResponse res)
@@ -22,8 +30,15 @@ public class TestCookiesSession extends HttpServlet {
 	HttpSession session = req.getSession( true );
 	if ( session.isNew() ) 
 	    res.sendRedirect(res.encodeURL(req.getRequestURI()));
-	else 
-	    res.sendRedirect(req.isRequestedSessionIdFromURL() ? failureURI : successURI );
+	else {
+            res.setContentType("text/html"); // Altrimenti non viene interpretato il codice html! apparirà come semplice testo!
+            
+	    String esito = (req.isRequestedSessionIdFromURL()) ? "Failure" : "Success";
+        
+            PrintWriter out = res.getWriter();
+            out.print("<h3>"+esito+"</h3>");
+        }
+        
     }
 
     public void doGet(HttpServletRequest req, HttpServletResponse res)
