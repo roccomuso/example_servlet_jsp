@@ -1,151 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	 version="3.1">
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet-mapping>
+        <servlet-name>servletMail</servlet-name>
+        <url-pattern>/servletMail</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
-    
-    <context-param><!-- I parametri di contesto sono visibili all'intera web-app. Si specificano dentro il tag web-app -->
-            <param-name>email_rocco</param-name>
-    <param-value>rocco@hackerstribe.com</param-value>
+    <context-param>
+        <!-- I parametri di contesto sono visibili all'intera web-app. Si specificano dentro il tag web-app -->
+        <param-name>email_rocco</param-name>
+        <param-value>rocco@hackerstribe.com</param-value>
     </context-param>
-    
-    
-    
     <!-- Tutte le Servlet dell'applicazione: -->
-    
-    
     <servlet>
         <description>Servlet che gestisce le richieste GET</description>
         <servlet-name>Paperino</servlet-name>
-        
-        <servlet-class>servletSaluto.ServletDiSaluto</servlet-class> <!-- servlet. indica la cartella, formato: cartella.classe -->
-
-    <init-param> <!-- I parametri di servlet sono definiti e visibili all'interno di una servlet, quindi non dalle altre servlet della stessa web-app -->
-                    <param-name>parametro_saluto</param-name>
-                    <param-value>Esempio di Servlet GET e parametri da file web.xml</param-value>
-    </init-param>
-
+        <servlet-class>servletSaluto.ServletDiSaluto</servlet-class>
+        <!-- servlet. indica la cartella, formato: cartella.classe -->
+        <init-param>
+            <!-- I parametri di servlet sono definiti e visibili all'interno di una servlet, quindi non dalle altre servlet della stessa web-app -->
+            <param-name>parametro_saluto</param-name>
+            <param-value>Esempio di Servlet GET e parametri da file web.xml</param-value>
+        </init-param>
     </servlet>
-    
+    <servlet>
+        <servlet-name>servletMail</servlet-name>
+        <servlet-class>servletMail.servletMail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Paperino</servlet-name>
         <url-pattern>/AliasServletDiSaluto</url-pattern>
     </servlet-mapping>
-    
-        
     <servlet>
         <description>Servlet che gestisce dati passati in POST</description>
         <servlet-name>Pluto</servlet-name>
-            
-            <servlet-class>servletPOST.ServletPOST</servlet-class> <!-- servlet. indica la cartella, formato: cartella.classe -->
+        <servlet-class>servletPOST.ServletPOST</servlet-class>
+        <!-- servlet. indica la cartella, formato: cartella.classe -->
     </servlet>
-	
     <servlet-mapping>
         <servlet-name>Pluto</servlet-name>
         <url-pattern>/AliasServletPOST</url-pattern>
     </servlet-mapping>
-    
-        
     <servlet>
-            <description>Servlet di Redirect</description>
-            <servlet-name>RedirectServ</servlet-name>
-            <servlet-class>servletREDIR.ServletREDIRECT</servlet-class> <!-- servlet. indica la cartella, formato: cartella.classe -->
+        <description>Servlet di Redirect</description>
+        <servlet-name>RedirectServ</servlet-name>
+        <servlet-class>servletREDIR.ServletREDIRECT</servlet-class>
+        <!-- servlet. indica la cartella, formato: cartella.classe -->
     </servlet>
-	
     <servlet-mapping>
         <servlet-name>RedirectServ</servlet-name>
         <url-pattern>/AliasServletRedirect</url-pattern>
     </servlet-mapping>
-    
-    
     <servlet>
-                <description>Servlet d'esempio per i Cookie</description>
-		<servlet-name>LoginServletCookie</servlet-name>
-		<servlet-class>servletLogins.ServletCookie</servlet-class> <!-- servlet. indica la cartella, formato: cartella.classe -->
+        <description>Servlet d'esempio per i Cookie</description>
+        <servlet-name>LoginServletCookie</servlet-name>
+        <servlet-class>servletLogins.ServletCookie</servlet-class>
+        <!-- servlet. indica la cartella, formato: cartella.classe -->
     </servlet>
-	
     <servlet-mapping>
         <servlet-name>LoginServletCookie</servlet-name>
         <url-pattern>/AliasLoginCookie</url-pattern>
     </servlet-mapping>
-    
-    
     <servlet>
-                <description>Servlet d'esempio per le Sessioni</description>
-		<servlet-name>LoginServletSession</servlet-name>
-		<servlet-class>servletLogins.ServletSession</servlet-class> <!-- servlet. indica la cartella, formato: cartella.classe -->
+        <description>Servlet d'esempio per le Sessioni</description>
+        <servlet-name>LoginServletSession</servlet-name>
+        <servlet-class>servletLogins.ServletSession</servlet-class>
+        <!-- servlet. indica la cartella, formato: cartella.classe -->
     </servlet>
-	
     <servlet-mapping>
         <servlet-name>LoginServletSession</servlet-name>
         <url-pattern>/AliasLoginSession</url-pattern>
     </servlet-mapping>
-    
     <servlet>
-                <description>Servlet d'esempio per urlEncode</description>
-		<servlet-name>EncodingServlet</servlet-name>
-		<servlet-class>servletUrlEncode.ServletEncode</servlet-class> <!-- servlet. indica la cartella, formato: cartella.classe -->
+        <description>Servlet d'esempio per urlEncode</description>
+        <servlet-name>EncodingServlet</servlet-name>
+        <servlet-class>servletUrlEncode.ServletEncode</servlet-class>
+        <!-- servlet. indica la cartella, formato: cartella.classe -->
     </servlet>
-	
     <servlet-mapping>
         <servlet-name>EncodingServlet</servlet-name>
         <url-pattern>/AliasServletEncoding</url-pattern>
     </servlet-mapping>
-    
-	
     <servlet>
-                <description>Servlet d'esempio per il RequestDispatcher</description>
-		<servlet-name>DispatcherServlet</servlet-name>
-		<servlet-class>servletDispatcher.ServletDispatcher</servlet-class> <!-- servlet. indica la cartella, formato: cartella.classe -->
+        <description>Servlet d'esempio per il RequestDispatcher</description>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <servlet-class>servletDispatcher.ServletDispatcher</servlet-class>
+        <!-- servlet. indica la cartella, formato: cartella.classe -->
     </servlet>
-	
     <servlet-mapping>
         <servlet-name>DispatcherServlet</servlet-name>
         <url-pattern>/AliasServletDispatcher</url-pattern>
     </servlet-mapping>
-    
     <!-- Servlet eCommerce -->
-    
-  <servlet>
+    <servlet>
         <description>Una servlet che capisce se i cookie sono abilitati o no</description>
         <servlet-name>test_cookies</servlet-name>
         <servlet-class>eCommerce.TestCookies</servlet-class>
-  </servlet>
-  <servlet>
+    </servlet>
+    <servlet>
         <description>Una servlet che capisce se i cookie sono abilitati o no usando le session</description>
         <servlet-name>test_cookies_session</servlet-name>
         <servlet-class>eCommerce.TestCookiesSession</servlet-class>
-  </servlet>
-  <servlet>
+    </servlet>
+    <servlet>
         <description>Una servlet che implementa un mini-sito di e-commerce</description>
         <servlet-name>e_commerce</servlet-name>
         <servlet-class>eCommerce.eCommerce</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>e_commerce</servlet-name>
-    <url-pattern>/e_commerce.html</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>test_cookies</servlet-name>
-    <url-pattern>/test_cookies.html</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>test_cookies_session</servlet-name>
-    <url-pattern>/test_cookies_session.html</url-pattern>
-  </servlet-mapping>    
-    
-    
-    
-    
-    
-    
-    
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>e_commerce</servlet-name>
+        <url-pattern>/e_commerce.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>test_cookies</servlet-name>
+        <url-pattern>/test_cookies.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>test_cookies_session</servlet-name>
+        <url-pattern>/test_cookies_session.html</url-pattern>
+    </servlet-mapping>
 </web-app>

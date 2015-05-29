@@ -15,7 +15,7 @@
     <body>
         <h1>Pagina di Arrivo.</h2>
         
-        Son stati passati i seguenti parametri:
+        Son stati passati i seguenti parametri:<br/><br/>
         
         <%
         

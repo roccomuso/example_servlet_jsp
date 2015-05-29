@@ -29,7 +29,7 @@
             Qui di seguito il tuo carrello:
             <br/>
             
-                <jsp:include page="carrello.jsp" />
+                <jsp:include page="carrello.jsp" /> <!-- questa dichiarazione al contrario della dichiarazione forward può essere gestita nell'if statement.-->
             
             <hr/>
             

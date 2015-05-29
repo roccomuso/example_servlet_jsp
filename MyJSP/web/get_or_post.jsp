@@ -8,7 +8,8 @@
         <p>
             <%
                 String nome = request.getParameter("nome"); // Sia che GET che POST.
-
+// Per il POST assicurarsi che il form non abbia l'attributo enctype settato, altrimenti NON FUNZIONERA'!
+                
                 if (nome != null){
             %>
             Benvenuto, <%=nome%>.
