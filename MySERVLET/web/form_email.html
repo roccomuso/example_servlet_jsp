@@ -1,27 +1,17 @@
-<%-- 
-
-Pagina per l'invio di una eMail.
-
-  Richiede le librerie:
-  - javax.mail.jar
-  - activation-1.1.jar (JavaBeans Activation Framework)
-  Quest'ultima se si usa Java 6 è già pre-installata.
- 
- 
-
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<!--
+Form che usa la servlet: servletMail.servletMail per l'invio di Email.
+-->
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Pagina per l'invio di una mail.</title>
+        <title>Invia una Mail</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <h1>Compila il form sottostante per inviare una email:</h1>
         
-        <form action="invia_mail.jsp" method="POST">
+        <form action="servletMail" method="POST">
             
             <input type="email" name="destinatario" placeholder="Inserisci destinatario" required/><br/><br/>
             <input type="text" name="oggetto" placeholder="Inserisci oggetto" required/><br/><br/>
@@ -31,6 +21,5 @@ Pagina per l'invio di una eMail.
             <input type="submit" value="Invia Mail" />
                  
         </form>
-        
     </body>
 </html>
