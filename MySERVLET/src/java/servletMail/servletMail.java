@@ -7,8 +7,7 @@ package servletMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 import javax.mail.*; // librerie per l'invio di mail
 import javax.mail.Message.RecipientType;
