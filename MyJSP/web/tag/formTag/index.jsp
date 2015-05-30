@@ -15,22 +15,28 @@
     <body>
         
         <%
-            if (request.getParameter("emailAddress") != "" && request.getParameter("firstName") != "" && request.getParameter("emailAddress") != null && request.getParameter("firstName") != null) {
+           if (request.getParameter("emailAddress") != null && request.getParameter("firstName") != null && request.getParameter("lastName") != null) 
+            if (!request.getParameter("emailAddress").equals("") && !request.getParameter("firstName").equals("") && !request.getParameter("lastName").equals("")) {
+        // Se son stati specificati Nome e Email e Cognome (tutti dunque):
         %>
         <jsp:forward page="attributi.jsp">
-            <jsp:param name="name" value='<%=request.getParameter("emailAddress")%>'/>
+            <jsp:param name="esito" value='OK'/>
         </jsp:forward>
-        <%} else if (request.getParameter("emailAddress") != "" && request.getParameter("emailAddress") != null) {%>
-        <jsp:forward page="attributi.jsp?name=NONSPECIFICATO"/>
+        <%} else {
+        // Se è stata specificata solo la Email:
+        %>
+        <jsp:forward page="attributi.jsp?esito=QUALCOSAMANCA"/>
         <%}%>
 
         <%@ taglib uri="/WEB-INF/tlds/mialib.tld" prefix="form_util" %>
-
+        
+        Prova a lasciare qualche campo vuoto, i campi compilati una volta tornati sulla pagina, rimarranno.
+        <br/>
         <form method="POST" action="index.jsp">
             <table>
                 <tr>
                     <td> Nome: </td>
-                    <td> <input type="text" size='15' name="firstName”
+                    <td> <input type="text" size='15' name="firstName"
                                 value="<form_util:requestParameter property='firstName'/>">
                     </td>
                 </tr>

@@ -21,7 +21,7 @@
     %>
     
     
-        <j:profilo_utente id="1"/>
+        <j:profilo_utente id="1"/> <!-- NOTA BENE. i nomi degli attributi devono essere uguali ai nomi degli attributi dentro il tag Handler e anche del setter! setid() <-- con id minuscolo come scritto nell'attributo -->
        
         <br/>
         

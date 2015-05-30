@@ -2,7 +2,7 @@
  * 
  */
 
-package tagHandler.protectedPage;
+package tagHandler.autenticazione;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,8 +18,9 @@ public class EnforceLoginTag extends TagSupport {
     public void setErrorPage (String errorPage) {
 	this.errorPage=errorPage;
     }
+    
     @Override
-    public int doEndTag() throws JspException {
+    public int doEndTag() throws JspException { // Il metodo doEndTag() decide se permettere la visualizzazione del resto della pagina
 	HttpSession session = pageContext.getSession();
 	HttpServletRequest req = (HttpServletRequest)pageContext.getRequest();
 	//usa una var protectedPage per memorizzare la pagina richiesta
@@ -32,7 +33,7 @@ public class EnforceLoginTag extends TagSupport {
 	    session.setAttribute("protected-page", protectedPage);
 	    try {
 		pageContext.forward(loginPage);
-		return SKIP_PAGE;
+		return SKIP_PAGE; // Ignora il resto della pagina
 	    }
 	    catch (Exception ex) {
 		throw new JspException(ex.getMessage());

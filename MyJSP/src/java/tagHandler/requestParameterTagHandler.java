@@ -1,10 +1,9 @@
 
 package tagHandler;
 
-import java.io.IOException;
 import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.*;
 
 /*
@@ -22,7 +21,9 @@ public class requestParameterTagHandler extends TagSupport { // Si implementa l'
     @Override
     public int doStartTag() throws JspException {
         ServletRequest req = pageContext.getRequest();
-        String value = req.getParameter(property);
+        HttpSession session = pageContext.getSession();
+        String value = (String) session.getAttribute(property); // Prendiamo i parametri già impostati e li riproponiamo.
+        
         try {
             pageContext.getOut().print(value == null ? "" : value);
         } catch (java.io.IOException ex) {

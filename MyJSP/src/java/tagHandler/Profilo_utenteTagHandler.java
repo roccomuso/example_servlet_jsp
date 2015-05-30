@@ -41,7 +41,7 @@ public class Profilo_utenteTagHandler extends SimpleTagSupport {
         
     }
 
-    public void setId(int id) {
+    public void setid(int id) {
         this.id = id;
     }
     

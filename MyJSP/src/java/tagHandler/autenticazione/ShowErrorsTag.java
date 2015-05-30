@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package tagHandler.protectedPage;
+package tagHandler.autenticazione;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;

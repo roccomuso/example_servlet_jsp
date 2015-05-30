@@ -1,16 +1,17 @@
 
 
-package tagHandler.protectedPage;
+package tagHandler.autenticazione;
 
+import java.io.IOException;
+import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import tagHandler.protectedPage.LoginDB;
-import tagHandler.protectedPage.User;
+import tagHandler.autenticazione.LoginDB;
+import tagHandler.autenticazione.User;
 
 public class AuthenticateServlet extends HttpServlet {
     private LoginDB loginDB;
@@ -38,7 +39,12 @@ public class AuthenticateServlet extends HttpServlet {
 	    //inserisce il bean utente nella sessione
 	    session.setAttribute("user",user);
 	    // res.sendRedirect(res.encodeURL(protectedPage));
-	    getServletContext().getRequestDispatcher(res.encodeURL(protectedPage)).forward(req,res);
+            
+            // ci facciamo stampare sui log, protectedPage:
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.info("VALORE protectedPage: "+protectedPage);
+	    
+            getServletContext().getRequestDispatcher(res.encodeURL(protectedPage)).forward(req,res); // getRequestDispatcher dal contesto richiede un URL che inizi per /
 	    // req.getRequestDispatcher(res.encodeURL(protectedPage)).forward(req,res);
 	}
 	//l’utente con i dati digitati nel form non è stato trovato nella base dati
@@ -46,11 +52,11 @@ public class AuthenticateServlet extends HttpServlet {
 	    String loginPage = (String) session.getAttribute("login-page");
 	    String errorPage = (String) session.getAttribute("error-page");
 	    String forwardTo = errorPage!=null?errorPage:loginPage;
-	    session.setAttribute("login-error", "Username and pass are not valid");
+	    session.setAttribute("login-error", "Username '"+uname+"' and pass are not valid");
 	    //la richiesta viene rediretta alla pagina di errore se è stata
 	    //configurata, altrimenti alla pagina di login
 	    // req.getRequestDispatcher(
-	    // 					     res.encodeURL(forwardTo)).forward(req,res);
+	    // 					     res.encodeURL(forwardTo)).forward(req,res); // il Dispatcher da request non ha bisogno che il path inizi per /
 	    getServletContext().getRequestDispatcher(
 	    					     res.encodeURL(forwardTo)).forward(req,res);
 	}

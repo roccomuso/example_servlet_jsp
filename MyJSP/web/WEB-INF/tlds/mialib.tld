@@ -49,80 +49,91 @@
       <type>java.lang.String</type>
     </attribute>
   </tag>
-  
+  <!-- Tag usato da returnTag -->
+  <tag>
+    <name>return</name>
+    <tag-class>tagHandler.tagReturn.returnHandler</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <name>valutaBodyTag</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <attribute>
+      <name>valutaPagina</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+  </tag>
   <!-- Tag usato da formTag -->
-  
   <tag>
-      <name>requestParameter</name>
-      <tagclass>tagHandler.requestParameterTagHandler</tagclass>
-      <bodycontent>empty</bodycontent>
-      <attribute>
-          <name>property</name>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
+    <name>requestParameter</name>
+    <tagclass>tagHandler.requestParameterTagHandler</tagclass>
+    <bodycontent>empty</bodycontent>
+    <attribute>
+      <name>property</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
   </tag>
-  
   <!-- Tag usato da /tag/bodyTag -->
-      
   <tag>
-      <name>heading</name>
-      <tagclass>tagHandler.bodyTagHandler</tagclass>
-      <info>Outputs a 1-cell table used as a heading.</info>
-      <bodycontent>JSP</bodycontent>
-      <attribute>
-          <name>bgColor</name>
-          <required>true</required> <!-- bgColor is required -->
-      </attribute>
-      <attribute>
-          <name>color</name>
-          <required>false</required>
-      </attribute>
-      <attribute>
-          <name>align</name>
-          <required>false</required>
-      </attribute>
-      <attribute>
-          <name>fontSize</name>
-          <required>false</required>
-      </attribute>
-      <attribute>
-          <name>fontList</name>
-          <required>false</required>
-      </attribute>
-      <attribute>
-          <name>border</name>
-          <required>false</required>
-      </attribute>
-      <attribute>
-          <name>width</name>
-          <required>false</required>
-      </attribute>
+    <name>heading</name>
+    <tagclass>tagHandler.bodyTagHandler</tagclass>
+    <info>Outputs a 1-cell table used as a heading.</info>
+    <bodycontent>JSP</bodycontent>
+    <attribute>
+      <name>bgColor</name>
+      <required>true</required>
+      <!-- bgColor is required -->
+    </attribute>
+    <attribute>
+      <name>color</name>
+      <required>false</required>
+    </attribute>
+    <attribute>
+      <name>align</name>
+      <required>false</required>
+    </attribute>
+    <attribute>
+      <name>fontSize</name>
+      <required>false</required>
+    </attribute>
+    <attribute>
+      <name>fontList</name>
+      <required>false</required>
+    </attribute>
+    <attribute>
+      <name>border</name>
+      <required>false</required>
+    </attribute>
+    <attribute>
+      <name>width</name>
+      <required>false</required>
+    </attribute>
   </tag>
-
-<!-- tag usato da /tag/protectedPage -->
-
+  <!-- tag usato da /tag/protectedPage -->
   <tag>
-      <name>enforceLogin</name>
-      <tagclass>tagHandler.protectedPage.EnforceLoginTag</tagclass>
-      <bodycontent>JSP</bodycontent>
-      <attribute>
-          <name> loginPage </name>
-          <required> true </required>
-          <rtexprvalue> true </rtexprvalue>
-      </attribute>
-      <attribute>
-          <name> errorPage </name>
-          <required> false </required>
-          <rtexprvalue> true </rtexprvalue>
-      </attribute>
+    <name>enforceLogin</name>
+    <tagclass>tagHandler.autenticazione.EnforceLoginTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <attribute>
+      <name> loginPage </name>
+      <required> true </required>
+      <rtexprvalue> true </rtexprvalue>
+    </attribute>
+    <attribute>
+      <name> errorPage </name>
+      <required> false </required>
+      <rtexprvalue> true </rtexprvalue>
+    </attribute>
   </tag>
-  <tag> 
-      <name>showErrors</name>
-      <tagclass>tagHandler.protectedPage.ShowErrorsTag</tagclass>
-      <bodycontent>empty</bodycontent>
+  <tag>
+    <name>showErrors</name>
+    <tagclass>tagHandler.autenticazione.ShowErrorsTag</tagclass>
+    <bodycontent>empty</bodycontent>
   </tag>
 
-
-    
 </taglib>

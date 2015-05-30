@@ -22,7 +22,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response, JspW
         }else if(modalita.equals("azione_predefinita")){
             out.println("<font color='red'>Spiacente, l'azione predefinita non può essere invocata in modo procedurale.</font>");
             %>
-            <%-- <!-- Il forward accetta anche dei parametri param per inviare dati insieme al redirect. -->
+            <%-- <!-- Il forward accetta anche dei parametri param per inviare dati insieme al redirect. Non può essere inserito nel costrutto if di una dichiarazione, verrà eseguito a priori. -->
             <jsp:forward page="destinazione.jsp" > 
                 <jsp:param name="parametro" value="valore" />
             </jsp:forward>
