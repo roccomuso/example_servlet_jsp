@@ -33,23 +33,24 @@ public class returnHandler extends TagSupport {
 
 
     @Override
-    public int doStartTag(){ // chiamato all'apertura del Tag
+    public int doStartTag(){ // chiamato all'apertura del Tag (valuta il tag d'apertura)
         // decidiamo se permettere la visualizzazione del body del Tag o meno. (Qui uno SKIP_PAGE non funziona, perchè quello va chiamato nel doEndTag().
         
         if (valutaBodyTag)
             return EVAL_BODY_INCLUDE; // Fa processare il Body del tag.
         else
-            return SKIP_BODY; // Ignora il contenuto del Tag, rimuove il Body dunque.
+            return SKIP_BODY; // Ignora il contenuto del Tag, rimuove il Body dunque:  <tag>...body...</tag>
         
     }
     
     @Override
-    public int doEndTag() throws JspException { // Il metodo doEndTag() decide se permettere la visualizzazione del resto della pagina
+    public int doEndTag() throws JspException { // chiamato alla chiusura del Tag (valuta il tag di chiusura)
+        // Con doEndTag() decidiamo se permettere la visualizzazione del resto della pagina
 	
         if (valutaPagina)
-            return EVAL_PAGE;
+            return EVAL_PAGE; // Valuta il contenuto della pagina dopo il tag di chiusura.
         else
-            return SKIP_PAGE;
+            return SKIP_PAGE; // Ignora il contenuto della pagina dopo il tag di chiusura.
         
     }
    

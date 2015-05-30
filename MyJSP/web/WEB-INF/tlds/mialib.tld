@@ -35,7 +35,7 @@
   </tag>
   <tag>
     <name>bodyTagHandler</name>
-    <tag-class>tagHandler.bodyTagHandler</tag-class>
+    <tag-class>tagHandler.HeadingTagHandler</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
       <name>bgColor</name>
@@ -78,10 +78,10 @@
       <rtexprvalue>true</rtexprvalue>
     </attribute>
   </tag>
-  <!-- Tag usato da /tag/bodyTag -->
+  <!-- Tag usato da /tag/headingTag -->
   <tag>
     <name>heading</name>
-    <tagclass>tagHandler.bodyTagHandler</tagclass>
+    <tagclass>tagHandler.HeadingTagHandler</tagclass>
     <info>Outputs a 1-cell table used as a heading.</info>
     <bodycontent>JSP</bodycontent>
     <attribute>
@@ -135,5 +135,4 @@
     <tagclass>tagHandler.autenticazione.ShowErrorsTag</tagclass>
     <bodycontent>empty</bodycontent>
   </tag>
-
 </taglib>

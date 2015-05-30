@@ -7,7 +7,7 @@ import javax.servlet.jsp.*;
 import javax.servlet.jsp.tagext.*;
 import java.io.*;
 
-public class bodyTagHandler extends TagSupport {
+public class HeadingTagHandler extends TagSupport {
     
 // Attributi passati al tag <heading>
     
@@ -63,7 +63,7 @@ public class bodyTagHandler extends TagSupport {
 	} catch(IOException ioe) {
 	    System.out.println("Error in HeadingTag: " + ioe);
 	}
-	return(EVAL_BODY_INCLUDE); // Include tag body
+	return(EVAL_BODY_INCLUDE); // Include il body del tag
     }
     
     @Override
