@@ -4,5 +4,5 @@
 <font size=4 color=red>Login Failed because:</font>
 <br/>
 <security:showErrors/> </font>
-Click <a href="./tag/autenticazione/login.jsp"> here </a> to retry login.
+Click <a href="./tag/autenticazioneProgrammata/login.jsp"> here </a> to retry login.
 </body></html>

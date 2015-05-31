@@ -5,28 +5,38 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 public class IteratorTagSimple extends BodyTagSupport{
+    
     private Collection collection;
-    private Iterator iterator;
+    private Iterator iterator; // Attributo passato dal tag
+    
     public void setCollection (Collection collection) {
 	this.collection=collection;
     }
-    public int doStartTag() throws JspException {
+    
+    @Override
+    public int doStartTag() throws JspException { // Solamente nello doStartTag() si processa il contenuto del body o si ignora.
 	return collection.size() > 0? EVAL_BODY_BUFFERED : SKIP_BODY;
     }
-    public void doInitBody() throws JspException {
+    
+    @Override
+    public void doInitBody() throws JspException { // Eseguito una volta sola.
 	iterator=collection.iterator();
     }
-    public int doAfterBody() throws JspException {
-	String repl = getBodyContent().getString(), writeThis = "";
+    
+    @Override
+    public int doAfterBody() throws JspException { // Ci permette di parsare il body del Tag, preso con getBodyContent().
+	String repl = getBodyContent().getString(); // Contenuto del body!
+        String writeThis = "";
+        
 	while (iterator.hasNext()) {
 	    writeThis += repl.replace("REPL_ITEM", iterator.next().toString());
 	}
 	try {
-	    getPreviousOut().print(writeThis);
+	    getPreviousOut().print(writeThis); // stampiamo nel body del tag.
 	}
 	catch (java.io.IOException e) {
 	    throw new JspException (e.getMessage());
 	}
-	return SKIP_BODY;
+	return SKIP_BODY; // Ignoriamo tanto è già stato trattato
     }
 }

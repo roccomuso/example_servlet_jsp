@@ -7,16 +7,16 @@
     <form action="<%=response.encodeURL("/MyJSP/authenticate")%>" method="POST">
         <%
             if (session.getAttribute("login-page") == null) {
-                session.setAttribute("login-page", "/tag/autenticazione/login.jsp");
+                session.setAttribute("login-page", "/tag/autenticazioneProgrammata/login.jsp");
             }
             if (session.getAttribute("error-page") == null) {
-                session.setAttribute("error-page", "/tag/autenticazione/error.jsp");
+                session.setAttribute("error-page", "/tag/autenticazioneProgrammata/error.jsp");
             }
             if (session.getAttribute("protected-page") == null) //for sendRedirect
             // session.setAttribute("protected-page", "/20150511/protectedPage.jsp");
             //for forward
             {
-                session.setAttribute("protected-page", "/tag/autenticazione/protectedPage.jsp"); // siccome il getRequestDispatcher viene invocato dal getServletContext() e non da una request, il path deve iniziare per /
+                session.setAttribute("protected-page", "/tag/autenticazioneProgrammata/protectedPage.jsp"); // siccome il getRequestDispatcher viene invocato dal getServletContext() e non da una request, il path deve iniziare per /
             }
         %>
         <table>

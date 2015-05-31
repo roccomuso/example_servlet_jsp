@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+  <tlib-version>1.0</tlib-version>
+  <short-name>bodytag</short-name>
+  <uri>/WEB-INF/tlds/bodyTag</uri>
+ 
+
+  <tag>
+      <name> iterate </name>
+      <tagclass> tagHandler.bodyTag.IteratorTag </tagclass>
+      <bodycontent> JSP </bodycontent>
+      <attribute>
+          <name> collection </name>
+          <required> true </required>
+          <rtexprvalue> true </rtexprvalue>
+      </attribute>
+      <info>
+          Scrive iterativamente gli elementi di una collezione</info>
+  </tag>
+  <tag>
+      <name> iterateSimple </name>
+      <tagclass> tagHandler.bodyTag.IteratorTagSimple </tagclass>
+      <bodycontent> JSP </bodycontent>
+      <attribute>
+          <name> collection </name>
+          <required> true </required>
+          <rtexprvalue> true </rtexprvalue>
+      </attribute>
+      <info>
+          Scrive iterativamente in modo semplice gli elementi di una collezione</info>
+  </tag>
+  <tag>
+      <name> iterateSimpleBis </name>
+      <tagclass> tagHandler.bodyTag.IteratorTagSimpleBis </tagclass>
+      <bodycontent> JSP </bodycontent>
+      <attribute>
+          <name> collection </name>
+          <required> true </required>
+          <rtexprvalue> true </rtexprvalue>
+      </attribute>
+      <info>
+          Scrive iterativamente in modo semplice gli elementi di una collezione</info>
+  </tag>
+
+  <tag>
+      <name>itera</name>
+      <tagclass> tagHandler.bodyTag.esempiTagHandler </tagclass>
+      <bodycontent> JSP </bodycontent>
+      <attribute>
+          <name> collection </name>
+          <required> true </required>
+          <rtexprvalue> true </rtexprvalue>
+      </attribute>
+      <info>
+          Scrive iterativamente in modo semplice gli elementi di una collezione</info>
+  </tag>
+  
+</taglib>
