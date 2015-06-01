@@ -30,9 +30,23 @@ La scelta viene specificata nel web.xml con i tag login-config e auth-method:
             <input type="submit" value="login">
         </form>
         <br/><br/>
+        <b>Con l'autenticazione BASIC, un form è praticamente inutile. Perchè tanto viene mostrato il Dialog Box che richiede le credenziali.</b><br/><br/>
         
         Credenziali per GlassFish definite da:<br/>
-        127.0.0.1:4848 > Configurazioni > Sicurezza > Realm > File > Gestisci Utenti
+        127.0.0.1:4848 > Configurazioni >  server-config > Sicurezza > Realm > File > Gestisci Utenti.
+        
+        Associazioni di principal (utenti) a ruoli, e di ruoli a gruppi in GlassFish nel file: glassfish-web.xml.<br/>
+        Però ugualmente bisogna definire i nomi dei ruoli disponibili in web.xml con: <code>&lt;security-role&gt;
+    &lt;role-name&gt;USERS&lt;/role-name&gt;
+            &lt;/security-role&gt;</code>
+        
+        <br/><br/>
+        
+        Per Tomcat la creazione di un utente e l'assegnazione del ruolo all'utente avviene dal file: tomcat-users.xml.<br/>
+        
+        <br/><br/>
+        
+        Se si prova ad effettuare l'accesso con un utente appartenente ad un altro gruppo, si ottiene una pagina d'errore 403 - Accesso Negato.
     </body>
 </html>
 

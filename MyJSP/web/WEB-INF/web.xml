@@ -50,7 +50,7 @@ L' <url-pattern> che segue dichiara l'intero progetto come protetto: <url-patter
         </web-resource-collection>
         <auth-constraint>
             <description>Necessaria autenticazione...</description>
-            <role-name>prova</role-name>
+            <role-name>user</role-name>
         </auth-constraint>
     </security-constraint>
     <security-constraint>
@@ -72,7 +72,7 @@ L' <url-pattern> che segue dichiara l'intero progetto come protetto: <url-patter
         <auth-method>BASIC</auth-method>
         <realm-name>file</realm-name>
     </login-config>
-    <security-role>
+    <security-role> <!-- un security-role per tutti i ruoli disponibili nella web-app -->
         <description>Ruolo di prova, a cui è associato l'utente rocco</description>
         <role-name>user</role-name>
     </security-role>

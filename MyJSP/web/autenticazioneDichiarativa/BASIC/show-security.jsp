@@ -11,4 +11,4 @@ This connection is NOT secure. <br>
 <% } %>
 Server Address: <%= request.getServerName() %> <br>
 Remote Host: <%= request.getRemoteHost() %> <br>
-Remote Addr; <%= request.getRemoteAddr() %>
+Remote Addr; <%= request.getRemoteAddr() %> <br>

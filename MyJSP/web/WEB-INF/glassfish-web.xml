@@ -4,8 +4,16 @@
 
     <security-role-mapping>
         <role-name>user</role-name>
-        <principal-name>Root</principal-name> <!-- Map a principal to the role 'user' -->
-        <group-name>prova</group-name> <!-- Map a group to the role 'user' -->
+        <principal-name>rocco</principal-name> <!-- Map a principal to the role 'user' -->
+        <principal-name>pippo</principal-name> <!-- In questo modo possiamo mappare anche un utente di un gruppo differente a questo ruolo. -->
+        <group-name>users</group-name> <!-- Map a group to the role 'user' -->
     </security-role-mapping>
 
+    <!-- E' possibile anche assegnare lo stesso ruolo a più gruppi...
+    <security-role-mapping>
+        <role-name>user</role-name>
+        <principal-name>rocco</principal-name> 
+        <group-name>cartoni</group-name> 
+    </security-role-mapping>-->
+    
 </glassfish-web-app>

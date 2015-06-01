@@ -17,10 +17,14 @@
         Non appartieni al ruolo <i>for_basic</i><br>
         <%
     }
-        if (request.isUserInRole("file")){
+        if (request.isUserInRole("user")){
             %>
 
-        Appartieni al ruolo <i>prova</i>
+        Appartieni al ruolo <i>user</i>
         
+        <%}else{%>
+        Non appartieni al ruolo <i>user</i><br/>
         <%}%>
+        
     </body></html>
+

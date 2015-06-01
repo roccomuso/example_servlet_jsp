@@ -31,7 +31,8 @@ La scelta viene specificata nel web.xml con i tag login-config e auth-method:
         <br/><br/>
         
         Credenziali per GlassFish definite da:<br/>
-        127.0.0.1:4848 > Configurazioni > Sicurezza > Realm > File > Gestisci Utenti
+        127.0.0.1:4848 > Configurazioni >  server-config > Sicurezza > Realm > File > Gestisci Utenti.
+        
     </body>
 </html>
 
