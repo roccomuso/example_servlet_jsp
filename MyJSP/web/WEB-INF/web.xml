@@ -31,49 +31,5 @@
         <servlet-name> provaUser </servlet-name>
         <url-pattern>/provaUser</url-pattern>
     </servlet-mapping>
-    <!-- Servlet per autenticazioneDichiarativa:BASIC -->
-    <security-constraint>
-        <display-name>pagina-protetta</display-name>
-        <web-resource-collection>
-            <!-- 
-L'elemento <url-pattern> definisce quale URLs nelle risorse web deve essere protetta. Se un utente prova ad accedere ad una URL protetta, viene rimandato alla pagina di login, dove immettere delle credenziali valide.
 
-Usando <url-pattern> si può restringere l'accesso all'intera applicazione web, una cartella o un file specifico.
-
-L' <url-pattern> che segue dichiara l'intero progetto come protetto: <url-pattern>/*</url-pattern>
-        -->
-            <web-resource-name>Pagina Protetta</web-resource-name>
-            <description>Esempio di una pagina protetta</description>
-            <url-pattern>/autenticazioneDichiarativa/BASIC/pagina-protetta.jsp</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-        </web-resource-collection>
-        <auth-constraint>
-            <description>Necessaria autenticazione...</description>
-            <role-name>user</role-name>
-        </auth-constraint>
-    </security-constraint>
-    <security-constraint>
-        <display-name>pagina-ciao</display-name>
-        <web-resource-collection>
-            <web-resource-name>pagina-ciao</web-resource-name>
-            <description>Esempio di pagina protetta..</description>
-            <url-pattern>/autenticazioneDichiarativa/BASIC/ciao.jsp</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-        </web-resource-collection>
-        <auth-constraint>
-            <description>Necessaria autenticazione...</description>
-            <role-name>user</role-name> <!-- I ruoli in GlassFish devono iniziare per LETTERA MAIUSCOLA! -->
-        </auth-constraint>
-    </security-constraint>
-    <login-config>
-        <!-- Il metodo basato su form funziona come il metodo BASIC ma viene visualizzata la pagina di login o errore anzichè una finestra di dialogo. (password trasmessa con codifica base64, codificata non cifrata! molto debole, anche col FORM viaggiano in chiaro le credenziali.) -->
-        <auth-method>BASIC</auth-method>
-        <realm-name>file</realm-name>
-    </login-config>
-    <security-role> <!-- un security-role per tutti i ruoli disponibili nella web-app -->
-        <description>Ruolo di prova, a cui è associato l'utente rocco</description>
-        <role-name>user</role-name>
-    </security-role>
 </web-app>
