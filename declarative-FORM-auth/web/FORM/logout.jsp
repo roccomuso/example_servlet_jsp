@@ -19,5 +19,6 @@
         
         PS. L'autenticazione BASIC non è stata pensata per gestire il LOG-OUT! (infatti non funziona nel modo classico..). Con il metodo FORM invece il logout funziona!
         
+        <br/><p>Torna alla <a href="../index.jsp">home</a>.</p>
     </body>
 </html>

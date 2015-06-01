@@ -1,5 +1,7 @@
 <%-- 
-    Pagina d'errore.
+Pagina d'errore.
+
+Se l'autenticazione non avviene correttamente si viene rimandati a questa pagina d'errore.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
