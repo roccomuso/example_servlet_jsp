@@ -1,7 +1,7 @@
 <%-- 
-    Document   : index
-    Created on : 1-giu-2015, 20.41.12
-    Author     : Rocco
+    Indice delle risorse protette.
+    Dopo il login tramite metodo FORM, si viene rimandati automaticamente alla context-root, e questa è la index contenuta e visualizzata dunque.
+
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
