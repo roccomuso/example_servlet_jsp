@@ -36,10 +36,10 @@
        
        // qui avremo l'oggetto settato dal bean, 'istanza'.
            
-        out.print(istanza.getClass().getName());
+       // out.print(istanza.getClass().getName());
         
-           out.print("<br/>"+istanza2.getNome()+"<br/>");
-           out.print(istanza2.getCognome());
+         //  out.print("<br/>"+istanza2.getNome()+"<br/>");
+         //  out.print(istanza2.getCognome());
        %>
     </body>
 </html>
