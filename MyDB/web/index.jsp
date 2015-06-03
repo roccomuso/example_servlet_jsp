@@ -12,7 +12,8 @@
     </head>
     <body>
         
-        <j:controllaSessione sessione="<%= session %>" /> <!-- Stampa il form se non esiste una sessione valida -->
+        <!-- Questo Tag controlla che esista la sessione, se non esiste stampa un form html di login, se esiste rimanda ad home.jsp -->
+        <j:controllaSessione sessione="<%= session %>" richiesta="<%= request %>" risposta="<%= response %>" /> <!-- Stampa il form se non esiste una sessione valida -->
         
         
     </body>

@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 public class dbSelect extends HttpServlet {
 
     private Connection connection;
-    private PreparedStatement getBooksQuery, putBooksQuery, updateBooksQuery, deleteBooksQuery;
+    private PreparedStatement getBooksQuery, putBooksQuery, updateBooksQuery, deleteBooksQuery; // 'preparedStatement' per eseguire comandi SQL parametrizzati, altrimenti per un comando SQL semplice va bene 'statement'
     
     private String error = null;
     
@@ -67,8 +69,10 @@ public class dbSelect extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
-        
+ 
         PrintWriter out = response.getWriter();
+
+        if (error != null) out.print(error);
                    
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -104,7 +108,7 @@ public class dbSelect extends HttpServlet {
 	    
                 // mostriamo i risultati
 	    
-	    while ( result.next() ) {
+	    while ( result.next() ) { // il next va subito avanti, perchè result alla prima iterazione ha il cursore che punta a prima della prima riga (-1), FONDAMENTALE!
                  // getInt("nome_colonna") oppure getInt(indice colonna); se è getInt restituisce un intero.
                  // Entrambi i metodi getInt o getString accettano il nome della colonna o l'indice della colonna, e restituiscono il tipo corrispondente.
                     
@@ -146,6 +150,20 @@ public class dbSelect extends HttpServlet {
         processRequest(request, response);
     }
 
+    @Override
+    public void destroy(){ // Elimina ogni preparedStatement e chiude tutte le connessioni
+        
+        try {
+        
+            getBooksQuery.close();
+            putBooksQuery.close();
+            deleteBooksQuery.close();
+            updateBooksQuery.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(dbSelect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     
     @Override
     public String getServletInfo() { // Descrizione servlet

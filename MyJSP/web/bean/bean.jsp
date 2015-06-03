@@ -18,7 +18,7 @@ public void jspInit(){ // Funzione di inizializzazione JSP. Richiamata al carica
 }
 %>
 <!-- Un modo possibile per condividere dati, oltre all'uso del Dispatcher con setAttribute, si possono usare i bean, con il contesto di visibilità 'scope' opportuno. E dunque richiamare l'istanza bean con l'id scelto dove più ci aggrada (gli scriptlet hanno visibilità dei bean solitamente.).. -->
-<jsp:useBean id="istanzaBean" class="javaBean.JavaBean" scope="session" />
+<jsp:useBean id="istanzaBean" class="javaBean.JavaBean" scope="session" /> <!-- invece di class possiamo usare assieme l'attributo type quando vogliamo fornire un data type ulteriore che sia superclasse per l'oggetto in class -->
 <!-- ogni parametro viene passato al Bean setter corrispondente. -->
 <jsp:setProperty name="istanzaBean" property="*" />
 

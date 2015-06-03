@@ -11,13 +11,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -25,13 +24,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class doLogin extends HttpServlet {
 
-        private Connection connection;
-    private PreparedStatement getUserQuery;
+    private Connection connection;
+    private PreparedStatement getUserQuery = null;
     
     private String error = null;
     
     // Configuriamo la connessione al DB e prepariamo le query SQL
-    @Override
+        @Override
     public void init( ServletConfig config )throws ServletException{
 	// attempt database connection and create PreparedStatements
 	try {
@@ -48,27 +47,29 @@ public class doLogin extends HttpServlet {
 	// indicate that the servlet is not currently available
 	catch ( SQLException e ) {
 	    error = "SQL problem" + e.getMessage();
-	    // throw new UnavailableException( "SQL problem" + e.getMessage() );
+	     //throw new UnavailableException( "SQL problem" + e.getMessage() );
 	}
 	// detect problems loading database driver
 	catch ( ClassNotFoundException e ) {
 	    error = "Unable to load driver" + e.getMessage();
-	    // throw new UnavailableException( "Unable to load driver" + e.getMessage() );
+	     //throw new UnavailableException( "Unable to load driver" + e.getMessage() );
 	}
 	catch ( Exception exception ) {
 	    error = "Generic error " + exception.getMessage();
 	    // exception.printStackTrace();
-	    // throw new UnavailableException( "Generic error " + exception.getMessage() );
+	     //throw new UnavailableException( "Generic error " + exception.getMessage() );
 	}
     }
     // fine del metodo init
-    
+  
     // processa entrambi i metodi GET e POST
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-            
+        PrintWriter out = response.getWriter();
+        if (error != null) out.print(error);
+        
+        try {
+                       
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -81,20 +82,33 @@ public class doLogin extends HttpServlet {
             String password = request.getParameter("password");
             getUserQuery.setString(2, password);
             
-            ResultSet result = getUserQuery.executeQuery();
+            ResultSet result = getUserQuery.executeQuery(); // result inizialmente punta sempre alla riga prima del risultato, è necessario ciclare con un result.next() o passare alla prima riga e analizzarla come si preferisce.
+            result.first(); // muoviamo il cursore alla prima riga dei risultati, inizialmente punta a nulla! FONDAMENTALE!
+
             if (result.getInt("esiste") == 0){
                 // Login non riuscito
-                
+                out.print("<h2>Login non riuscito!</h2>");
+                out.print("<a href='index.jsp'>Riprova</a>.");
             }else{
                 // Login riuscito
-            
+                HttpSession session = request.getSession();
+                session.setAttribute("username", username);
+                session.setAttribute("email", result.getString("email"));
+                session.setAttribute("nome", result.getString("nome"));
+                session.setAttribute("cognome", result.getString("cognome"));
+                // redirect 
+                response.sendRedirect("home.jsp");
             }
             
             out.println("</body>");
             out.println("</html>");
             
         }   catch (SQLException ex) {
-                Logger.getLogger(doLogin.class.getName()).log(Level.SEVERE, null, ex);
+                out.print("SQLException: "+ex.getMessage());
+            }
+            catch(Exception e){
+                out.print("Eccezione: "+e.getMessage());
+                
             }
     }
 

@@ -29,5 +29,15 @@
       <rtexprvalue>true</rtexprvalue>
       <type>javax.servlet.http.HttpSession</type>
     </attribute>
+    <attribute>
+      <name>richiesta</name>
+      <rtexprvalue>true</rtexprvalue>
+      <type>javax.servlet.http.HttpServletRequest</type>
+    </attribute>
+    <attribute>
+      <name>risposta</name>
+      <rtexprvalue>true</rtexprvalue>
+      <type>javax.servlet.http.HttpServletResponse</type>
+    </attribute>
   </tag>
 </taglib>
