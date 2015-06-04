@@ -9,7 +9,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import javax.servlet.http.HttpSession;
 import strutture_dati.Carrello;
 
@@ -67,6 +71,8 @@ public class dbCall {
         if (error != null) return error;
         
         String output = "";
+        Carrello cart = (Carrello) session.getAttribute("carrello");
+        int id_utente = (int) session.getAttribute("id_utente");
                 
         try {
                        
@@ -74,20 +80,57 @@ public class dbCall {
 
                 case "completa_acquisto":
                     // da session si ricava id_utente e carrello.
-
+                    
+                    
+                    if (cart != null && id_utente != 0 && !cart.prodotti.isEmpty()){
                     // ottenuti i dati si inserisce nella tabella <ordini> la entry dell'ordine.
+                        String lista_id_prodotti = "";
+                    
+                    // prezzo totale
+                    lista_id_prodotti = lista_id_prodotti_da_carrello(cart.prodotti);
+                    Statement query_prezzo_totale = connection.createStatement();
+                    String qry = "SELECT id_prodotto, prezzo FROM catalogo WHERE id_prodotto IN ("+lista_id_prodotti+")";
+                    ResultSet rs = query_prezzo_totale.executeQuery(qry);
+                    int totale = 0;
+                    while(rs.next())
+                        for (Entry<Integer,Integer> e: cart.prodotti.entrySet())
+                            if (e.getKey().equals(rs.getInt("id_prodotto")))
+                                totale = totale + e.getValue() * rs.getInt("prezzo"); // quantita' x prezzo
+                    
+                                        
+                    // data attuale
+                    String data_attuale = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+                    
+                    // Inseriamo ordine e prendiamo l'id dell'ordine appena immesso
                     Statement queryImmettiOrdine = connection.createStatement();
-                    String query = " . . .";
-                    int id_immesso = queryImmettiOrdine.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
-
-
+                    String query = "INSERT INTO `ordini`(`data_ordine`, `id_utente`, `totale`) VALUES ('"+data_attuale+"','"+id_utente+"','"+totale+"')";
+                    queryImmettiOrdine.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+                    
+                    ResultSet id_generati = queryImmettiOrdine.getGeneratedKeys();
+                    int id_ordine_immesso = 0;
+                    if (id_generati.next()) id_ordine_immesso = id_generati.getInt(1); // prendiamo l'id appena generato per l'ordine
+                    
+                    if (id_ordine_immesso == 0) return "Impossibile generare un ordine!";
+                        
                     // poi si inserisce per ogni prodotto e quantità (default:1) una entry nella tabella <acquisti>, col numero d'ordine appena generato.
-
+                    Statement queryImmettiAcquisto = connection.createStatement();
+                    for (Entry<Integer,Integer> e: cart.prodotti.entrySet()){
+                        query = "INSERT INTO `acquisti`(`numero_ordine`,`id_prodotto`,`quantita`) VALUES("+id_ordine_immesso+","+e.getKey()+","+e.getValue()+")";
+                        queryImmettiAcquisto.executeUpdate(query);
+                    }
+                    
+                    // svuotiamo il carrello, ordine ormai completato.
+                    session.removeAttribute("carrello");
+                    
+                    output = "<h3>Ordine immesso con successo!</h3><a href='home.jsp'>Torna alla Home</a>";
+                    
+                    
+                    }else output = "Carrello non esistente o nessun prodotto nel carrello!";
                 break;
 
                 case "stampa_carrello":
                     // da session ricaviamo il carrello.
-                    Carrello cart = (Carrello) session.getAttribute("carrello");
+                    
 
                     if (cart == null) return "Carrello non esistente!";
 
@@ -95,10 +138,8 @@ public class dbCall {
                     
                     String lista_id_prodotti = "";
 
-                    for (Map.Entry e: cart.prodotti.entrySet())
-                        lista_id_prodotti = lista_id_prodotti + e.getKey() + ",";
-
-                    lista_id_prodotti = lista_id_prodotti.substring(0, lista_id_prodotti.lastIndexOf(",")); // rimuoviamo virgola finale.
+                    lista_id_prodotti = lista_id_prodotti_da_carrello(cart.prodotti); // lista id prodotti nel carrello separati da virgola
+                    
                     
                     // Otteniamo il nome dei prodotti, interrogando il DB
                     PreparedStatement queryProdotti = connection.prepareStatement("SELECT id_prodotto, nome FROM catalogo WHERE id_prodotto IN ("+lista_id_prodotti+")");
@@ -130,5 +171,16 @@ public class dbCall {
     
     }
 
+    public static String lista_id_prodotti_da_carrello(Map<Integer,Integer> prodotti){ // dato il carrello prodotti restituisce gli id separati da virgola presenti all'interno.
+    
+        String lista_id_prodotti = "";
+    for (Map.Entry e: prodotti.entrySet())
+                        lista_id_prodotti = lista_id_prodotti + e.getKey() + ",";
+
+                    lista_id_prodotti = lista_id_prodotti.substring(0, lista_id_prodotti.lastIndexOf(",")); // rimuoviamo virgola finale.
+                    
+    return lista_id_prodotti;
+                    
+    }
     
 }

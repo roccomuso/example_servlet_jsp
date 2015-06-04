@@ -17,7 +17,7 @@
             // stampiamo il contenuto del carrello.
             out.print(dbCall.processRequest("stampa_carrello", session));
             %>
-            <form action='/inoltraOrdine' method="POST">
+            <form action='<%= getServletContext().getContextPath() %>/inoltraOrdine' method="POST">
                 <input type="submit" value="Procedi all'acquisto." />
             </form>
         <%
