@@ -4,9 +4,17 @@
         <servlet-name>doLogin</servlet-name>
         <servlet-class>utility.doLogin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>operazioniSulCarrello</servlet-name>
+        <servlet-class>utility.operazioniSulCarrello</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>doLogin</servlet-name>
         <url-pattern>/doLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>operazioniSulCarrello</servlet-name>
+        <url-pattern>/operazioniSulCarrello</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

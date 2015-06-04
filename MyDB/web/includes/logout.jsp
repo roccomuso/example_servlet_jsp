@@ -22,8 +22,8 @@
         
             // Non c'è bisogno, il carrello viene memorizzato nella sessione, come Attributo.
             
-            
-            response.sendRedirect(request.getContextPath()); // redirect alla context root.
+
         %>
+        Logout effettuato. Torna alla <a href='<%= request.getContextPath()%>'>Index</a>.
     </body>
 </html>

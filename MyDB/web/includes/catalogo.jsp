@@ -2,6 +2,7 @@
     Pagina che elenca tutto il catalogo di prodotti presente nel DB.
 --%>
 
+<%@page import="java.sql.Statement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -10,13 +11,7 @@
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Catalogo prodotti</title>
-    </head>
-    <body>
+
         <%@include file="../check_session.jsp" %> <!-- incluso da tutte le pagine che devono essere protette. -->
         
         <h1>Catalogo prodotti</h1>
@@ -27,6 +22,7 @@
         
     private Connection connection;
     private PreparedStatement getProductsQuery = null;
+    private Statement getProductsNumberQuery = null;
     
     private String error = null;
     
@@ -40,8 +36,8 @@
 	    connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/esempi_servlet", "root", "root"); // db - user - pass
 	    
 	    // query:
-	    getProductsQuery = connection.prepareStatement("SELECT *, COUNT(*) AS esiste FROM catalogo");
-	    
+	    getProductsQuery = connection.prepareStatement("SELECT * FROM catalogo");
+	    getProductsNumberQuery = connection.createStatement();
             
 	}
 	// for any exception throw an UnavailableException to
@@ -71,10 +67,11 @@
         
 
             ResultSet result = getProductsQuery.executeQuery(); // result inizialmente punta sempre alla riga prima del risultato, è necessario ciclare con un result.next() o passare alla prima riga e analizzarla come si preferisce.
+            ResultSet nProdotti = getProductsNumberQuery.executeQuery("SELECT COUNT(*) AS esiste FROM catalogo");
             
-            result.first(); // muoviamo il cursore alla prima riga dei risultati, inizialmente punta a nulla! FONDAMENTALE!
+            nProdotti.first(); // muoviamo il cursore alla prima riga dei risultati, inizialmente punta a nulla! FONDAMENTALE!
 
-            if (result.getInt("esiste") == 0){
+            if (nProdotti.getInt("esiste") == 0){
                 // Non esistono prodotti
                 out.print("<font color='red' size='10'>Non esistono prodotti nel catalogo!</font>");
                 
@@ -86,7 +83,7 @@
                 out.print("<thead><tr><th>ID</th><th>Nome</th><th>Descrizione</th><th>Disponibilità</th><th>Prezzo</th><th>Acquista</th></tr></thead><tbody>");
                 while(result.next()){
                     
-                    out.print("<tr><td>"+result.getInt("id_prodotto")+"</td><td>"+result.getString("nome")+"</td><td>"+result.getString("descrizione")+"</td><td>"+result.getInt("quantita")+"</td><td>"+result.getInt("prezzo")+" €</td><td><a href=''>Acquista</a></td></tr>");
+                    out.print("<tr><td>"+result.getInt("id_prodotto")+"</td><td>"+result.getString("nome")+"</td><td>"+result.getString("descrizione")+"</td><td>"+result.getInt("quantita")+"</td><td>"+result.getInt("prezzo")+" €</td><td><a href='./operazioniSulCarrello?action=add&prod="+result.getInt("id_prodotto")+"'>Acquista</a></td></tr>");
                 
                 }
                 out.print("</tbody></table><br/><br/>");
@@ -96,5 +93,4 @@
 
         
         %>
-    </body>
-</html>
+  

@@ -92,6 +92,7 @@ public class doLogin extends HttpServlet {
             }else{
                 // Login riuscito
                 HttpSession session = request.getSession();
+                session.setAttribute("id_utente", result.getInt("id_utente"));
                 session.setAttribute("username", username);
                 session.setAttribute("email", result.getString("email"));
                 session.setAttribute("nome", result.getString("nome"));

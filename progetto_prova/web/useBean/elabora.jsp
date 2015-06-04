@@ -28,10 +28,16 @@
         
         <jsp:useBean id="istanza" class="java.util.HashMap<String, String>" type="java.util.Map" scope="session" />
         
-        <jsp:useBean id="istanza2" type="beans.Utente" scope="session" />
+            <!-- useBean non funziona con costruttore vuoto e type, e senza che ci sia un attributo di sessione chiamato istanza2 settato. -->
+            <!-- useBean non funziona con costruttore pieno e type, e senza che ci sia un attributo di sessione chiamato istanza2 settato. -->
+            <jsp:useBean id="istanza2" type="beans.Utente" scope="session" />
         
             <jsp:setProperty name="istanza2" property="*" /> <!-- setta tutte le proprietà passate dal form HTML -->
         
+            <!-- useBean Funziona con costruttore vuoto e class, e senza che ci sia un attributo di sessione istanza3 settato. -->
+            <!-- useBean non funziona con costruttore pieno e class, e senza che ci sia un attributo di sessione istanza3 settato. -->
+            <jsp:useBean id="istanza3" class="beans.Utente" scope="session" />
+             
        <%
        
        // qui avremo l'oggetto settato dal bean, 'istanza'.
