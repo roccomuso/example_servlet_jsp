@@ -39,12 +39,12 @@ public class controllaSessioneTagHandler extends SimpleTagSupport {
                 
             }else{
                 // Stampiamo form di login.
-                out.print("<h2>Effettua il login!</h2>");
-                out.print("<form action='doLogin' method='POST'>");
-                out.print("<input type='text' name='username' placeholder='Username...'/><br/>");
-                out.print("<input type='password' name='password' placeholder='Password...'/><br/>");
+                out.print("<h2>LOGIN</h2>");
+                out.print("<div style='width:250px'><fieldset><legend>Effettua il login per procedere</legend><form action='doLogin' method='POST'>");
+                out.print("<br/><input type='text' name='username' placeholder='Username...'/><br/><br/>");
+                out.print("<input type='password' name='password' placeholder='Password...'/><br/><br/>");
                 out.print("<input type='submit' value='Login' />");
-                out.print("</form>");
+                out.print("</form></fieldset></div>");
                 
             }
             

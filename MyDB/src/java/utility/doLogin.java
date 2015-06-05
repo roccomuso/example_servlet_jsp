@@ -39,23 +39,23 @@ public class doLogin extends HttpServlet {
 	    connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/esempi_servlet", "root", "root"); // db - user - pass
 	    
 	    // query:
-	    getUserQuery = connection.prepareStatement("SELECT *, COUNT(*) AS esiste FROM utenti WHERE username = ? AND password = ?");
+	    getUserQuery = connection.prepareStatement("SELECT * FROM utenti WHERE username = ? AND password = ?");
 	    
             
 	}
 	// for any exception throw an UnavailableException to
 	// indicate that the servlet is not currently available
 	catch ( SQLException e ) {
-	    error = "SQL problem" + e.getMessage();
+	    error = "SQL problem: " + e.getMessage();
 	     //throw new UnavailableException( "SQL problem" + e.getMessage() );
 	}
 	// detect problems loading database driver
 	catch ( ClassNotFoundException e ) {
-	    error = "Unable to load driver" + e.getMessage();
+	    error = "Unable to load driver: " + e.getMessage();
 	     //throw new UnavailableException( "Unable to load driver" + e.getMessage() );
 	}
 	catch ( Exception exception ) {
-	    error = "Generic error " + exception.getMessage();
+	    error = "Generic error: " + exception.getMessage();
 	    // exception.printStackTrace();
 	     //throw new UnavailableException( "Generic error " + exception.getMessage() );
 	}
@@ -83,9 +83,9 @@ public class doLogin extends HttpServlet {
             getUserQuery.setString(2, password);
             
             ResultSet result = getUserQuery.executeQuery(); // result inizialmente punta sempre alla riga prima del risultato, è necessario ciclare con un result.next() o passare alla prima riga e analizzarla come si preferisce.
-            result.first(); // muoviamo il cursore alla prima riga dei risultati, inizialmente punta a nulla! FONDAMENTALE!
+            //result.first(); // muoviamo il cursore alla prima riga dei risultati, inizialmente punta a nulla! FONDAMENTALE!
 
-            if (result.getInt("esiste") == 0){
+            if (!result.next()){
                 // Login non riuscito
                 out.print("<h2>Login non riuscito!</h2>");
                 out.print("<a href='index.jsp'>Riprova</a>.");
@@ -99,7 +99,9 @@ public class doLogin extends HttpServlet {
                 session.setAttribute("cognome", result.getString("cognome"));
                 // redirect 
                 response.sendRedirect("home.jsp");
+            
             }
+
             
             out.println("</body>");
             out.println("</html>");
