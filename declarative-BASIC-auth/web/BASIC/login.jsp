@@ -3,13 +3,15 @@
 Ci sono 3 tipi di autenticazione DICHIARATIVA:
 - BASIC (viene mostrata la finestra di dialogo che chiede le credenziali)
 - basata su Form  (Il metodo basato su form funziona come il metodo BASIC ma viene visualizzata la pagina di login anzichè una finestra di dialogo. (password trasmessa con codifica base64)
-- DIGEST
+- DIGEST (c'è la finestra di dialogo e le credenziali sono cifrate!)
 
 La scelta viene specificata nel web.xml con i tag login-config e auth-method. E' possibile usare un solo metodo d'autenticazione per ogni web.xml e quindi per ogni web-app:
     <login-config>
         <auth-method>BASIC</auth-method>
         <realm-name>Esempio di autenticazione Basic</realm-name>
     </login-config>
+
+Queste autenticazioni avvengono in modo trasparente alle pagine JSP e alle Servlet.
 
 -->
 

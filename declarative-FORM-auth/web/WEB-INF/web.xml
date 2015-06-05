@@ -17,6 +17,7 @@
             <!-- necessario! chiunque con il ruolo specificato può accedere a queste risorse -->
             <description>Necessaria autenticazione...</description>
             <role-name>user</role-name>
+            <!-- <role-name>admin</role-name> è possibile aggiungere anche più ruoli... -->
         </auth-constraint>
     </security-constraint>
     <login-config>
