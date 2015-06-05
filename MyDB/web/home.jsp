@@ -9,13 +9,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
+    <body style='width:650px'>
         <%@include file="check_session.jsp" %> <!-- incluso da tutte le pagine che devono essere protette. -->
         
-        <h2>Benvenuto nella sezione privata: 
-            <a href='home.jsp?page=ordini'>Ordini</a> - <a href='home.jsp?page=profilo_utente'>Profilo Utente</a> - [<a href='home.jsp?page=logout'>Logout</a>]</h2>
+        <h2>Benvenuto nella sezione privata: <br/>
+            <a href='home.jsp'>Home</a> - <a href='home.jsp?page=ordini'>Ordini</a> - <a href='home.jsp?page=profilo_utente'>Profilo Utente</a> - [<a href='home.jsp?page=logout'>Logout</a>]</h2>
         
-        <p align="center">Da questa sezione puoi sfogliare il catalogo, effettuare acquisti e lasciare recensioni.</p>
     
         
         <%!
@@ -59,6 +58,7 @@
                 break;
                 case home:
         %>
+        <p align="center">Da questa sezione puoi sfogliare il catalogo, effettuare acquisti e lasciare recensioni.</p>
             <jsp:include page="./includes/catalogo.jsp" />
             <hr/>
             <jsp:include page="./includes/carrello.jsp" />

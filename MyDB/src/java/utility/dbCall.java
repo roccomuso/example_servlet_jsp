@@ -72,8 +72,13 @@ public class dbCall {
         
         String output = "";
         Carrello cart = (Carrello) session.getAttribute("carrello");
-        int id_utente = (int) session.getAttribute("id_utente");
-                
+        
+        
+        int id_utente = 0;
+        
+        if (session.getAttribute("id_utente") != null) id_utente = (int) session.getAttribute("id_utente");
+        if (id_utente == 0) return "Session non presente...!";
+        
         try {
                        
             switch(cmd){ // Switch su string dalle classi Java funziona. (JDK >= 1.7) (Stranamente dal JSP no e bisogna ripiegare su enum).
@@ -157,6 +162,110 @@ public class dbCall {
 
                 break;
 
+                case "lista_ordini":
+                    // id_utente preso dalla sessione passata.
+                    // la stringa output viene sempre restituita dopo questa chiamata.
+                    
+                    output = "<table border='1'><thead>"
+                            + "<tr><th># Ordine</th><th>Data ordine</th><th>Totale</th></tr></thead><tbody>";
+                    
+                    Statement getOrders = connection.createStatement();
+                    ResultSet ordini = getOrders.executeQuery("SELECT * FROM ordini WHERE id_utente ="+id_utente);
+                    
+                    while(ordini.next()){
+                    
+                        output += "<tr><td>"+ordini.getInt("numero_ordine")+"</td><td>"+ordini.getString("data_ordine")+"</td><td>"+ordini.getInt("totale")+" €</td></tr>";
+                    }
+                    
+                    output += "</tbody></table>";
+                    
+                    if (output.length() < 118) output = "<h2><u>Nessun ordine presente!</u></h2>";
+                    
+                break;
+            
+                case "profilo_utente":
+                    // id_utente preso dalla sessione passata.
+                    
+                    output = "<h2>Ecco le info sul tuo profilo:</h2>";
+                    
+                    Statement getUserInfo = connection.createStatement();
+                    ResultSet profilo = getUserInfo.executeQuery("SELECT * FROM utenti WHERE id_utente = "+id_utente);
+                    
+                    profilo.next(); // perchè il cursore inizialmente sta a -1
+                    
+                    output += "<table border='1'>"
+                    + "<tr><td>ID Utente</td><td>"+profilo.getInt("id_utente")+"</td></tr>"
+                    + "<tr><td>Username</td><td>"+profilo.getString("username")+"</td></tr>"
+                    + "<tr><td>Email</td><td>"+profilo.getString("email")+"</td></tr>"
+                    + "<tr><td>Nome</td><td>"+profilo.getString("nome")+"</td></tr>"
+                    + "<tr><td>Cognome</td><td>"+profilo.getString("cognome")+"</td></tr>"
+                    + "</table>";
+                    
+                break;
+                    
+              
+                case "recensioni_da_lasciare":
+                    // id_utente preso dalla sessione
+                    
+                    PreparedStatement getProductToReview = connection.prepareStatement("SELECT acquisti.id_prodotto, acquisti.numero_ordine, acquisti.quantita, catalogo.nome FROM acquisti JOIN catalogo ON (acquisti.id_prodotto = catalogo.id_prodotto) WHERE (acquisti.numero_ordine, acquisti.id_prodotto) NOT IN (SELECT numero_ordine, id_prodotto FROM recensioni WHERE id_utente = ?)");
+                    getProductToReview.setInt(1, id_utente);
+                    ResultSet da_recensire = getProductToReview.executeQuery();
+                    
+                    if (!da_recensire.next()){ // Non ci sono risultati
+                        output = "<font color='green' size='8'>Nessuna recensione da lasciare!</font>";
+                    }else{ // ci sono record da mostrare
+                        
+                        do{ // perchè già al .next() sopra il cursorse è stato spostato alla prima riga.
+                        
+                            output = "<fieldset>" +
+"    <legend>Ci risulta che hai acquistato <em><b>"+da_recensire.getInt("quantita")+"</b></em> pezzi di <em><b>"+da_recensire.getString("nome")+"</b></em>, lascia una recensione!</legend>\n" +
+"    <form action='lascia_recensione.jsp' method='POST'>"+
+"    <input type='hidden' name='id_prodotto' value='"+da_recensire.getInt("id_prodotto")+"' />" +
+"    <input type='hidden' name='numero_ordine' value='"+da_recensire.getInt("numero_ordine")+"' />" +
+"    <input type='hidden' name='id_utente' value='"+id_utente+"' />" +
+"        <textarea rows='10' cols='60' name='testo_recensione' placeholder='Scrivi la tua recensione...'></textarea>" +
+"    <br/><fieldset>" +
+"        <legend>Dai un voto al prodotto!</legend>" +
+"        1 <input type='radio' name='stars' value='1' checked='checked'/>" +
+"        2 <input type='radio' name='stars' value='2'/>" +
+"        3 <input type='radio' name='stars' value='3'/>" +
+"        4 <input type='radio' name='stars' value='4'/>" +
+"        5 <input type='radio' name='stars' value='5'/>" +
+"    </fieldset>"+
+"    <br/><input type='submit' value='Invia recensione!' /></form>" +
+"</fieldset><br/><br/>";
+                        
+                        }while(da_recensire.next());
+
+                    }
+                    
+           
+                break;
+                    
+                case "recensioni_lasciate":
+                    // id_utente preso dalla sessione
+                    
+                    PreparedStatement getReviews = connection.prepareStatement("SELECT id_recensione, nome, recensioni.id_prodotto, data, testo_recensione, stars FROM recensioni JOIN catalogo ON (recensioni.id_prodotto = catalogo.id_prodotto) WHERE id_utente = ? ORDER BY data DESC");
+                    getReviews.setInt(1, id_utente);
+                    ResultSet recensioni = getReviews.executeQuery();
+                    
+                    if (!recensioni.next()){ // Nessuna recensione
+                        output = "<u>Nessuna recensione lasciata!</u>";
+                    }else{ // Stampiamo le recensioni presenti
+                        
+                        output = "<table border='1'><thead><tr><th># Recensione</th><th>Lasciata per</th><th>Recensione</th><th>Stelle 1/5</th><th>Data</th></tr></thead>";
+                        
+                        do{ // perchè già al .next() sopra il cursorse è stato spostato alla prima riga.
+                            output += "<tr><td>"+recensioni.getInt("id_recensione")+"</td><td>"+recensioni.getString("nome")+"</td><td>"+recensioni.getString("testo_recensione")+"</td><td>"+recensioni.getInt("stars")+"</td><td>"+recensioni.getString("data")+"</td></tr>";
+                        }while(recensioni.next());
+                    
+                        output += "</tbody></table>";
+                    
+                    }
+                    
+
+                break;
+                    
             }
             
         }   catch (SQLException ex) {
