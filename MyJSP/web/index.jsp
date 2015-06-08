@@ -55,8 +55,8 @@
         <%-- 
         Due diversi tipi di include:
         
-        <jsp:include page="get_or_post.jsp" />
-        <%@include file="get_or_post.jsp" %>
+        <jsp:include page="get_or_post.jsp" />       <-- azione standard/predefinita
+        <%@include file="get_or_post.jsp" %>         <-- direttiva
         
         si comportano allo stesso modo. Come l'include nel PHP.
         --%>               
@@ -64,7 +64,7 @@
         Ecco un esempio di espressione: Benvenuto, <%= request.getParameter("nome") %>
         
         <%
-            out.println(getServletContext().getInitParameter("parametro")); // parametro preso direttamente dal deployment descriptor (web.xml)
+            out.println(getServletContext().getInitParameter("email_rocco")); // parametro preso direttamente dal deployment descriptor (web.xml)
         %>
         
         

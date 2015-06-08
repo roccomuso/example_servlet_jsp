@@ -56,7 +56,7 @@
         %>
         
         <!-- Otteniamo l'istanza 'oggetto2', definita da A.jsp con getServletContext().setAttribute() -->
-        <jsp:useBean id="oggetto_mappa" class="java.util.HashMap<String, String>" scope="application" />
+        <jsp:useBean id="oggetto_mappa" class="java.util.HashMap<String, String>" scope="application" /> <!-- è l'azione standard a provocare l'eccezione, IstantiationException -->
         
         
         <%
@@ -72,7 +72,20 @@
           
         }
         
+        String nome = "Pagina B";
+        pageContext.setAttribute("oggetto_pagina", nome); // settiamo questa var solo in questo contesto di pagina. Quello settato dalla pagina A è differente! è un altro pageContext!
+            
+        try{
+        %>
+        <br/><br/>
+        <jsp:useBean id="oggetto_pagina" type="java.lang.String" scope="page" /> <!-- Anche a seconda del tipo di classe può dare eccezioni di mancata istanziazione -->
+        <%
         
+        out.print(oggetto_pagina);
+       
+        }catch(Exception e){
+            out.print("Non è presente questo oggetto nello scope <b>page</b>.");
+        }
         %>
         
     </body>

@@ -1,10 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-package beans;
+package beans; // importante specificare il package.
 
 /**
  *
@@ -12,7 +7,7 @@ package beans;
  */
 public class Utente {
     
-    private String nome, cognome;
+    private String nome, cognome; // I bean devono avere sempre gli attributi di classe privati.
 
     public String getNome() {
         return nome;

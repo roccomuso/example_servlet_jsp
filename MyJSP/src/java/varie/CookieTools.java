@@ -35,7 +35,7 @@ public class CookieTools {
             
     }
     
-    public static Map<String, String> convert_Cookie_to_Map(Cookie[] cookies){ // Converte un arrai di Cookie in un HashMap.
+    public static Map<String, String> convert_Cookie_to_Map(Cookie[] cookies){ // Converte un array di Cookie in un HashMap.
     
         // Facciamo una mappa, perchè è più pratica dell'array cookies.
         Map<String, String> COOKIES = new HashMap();

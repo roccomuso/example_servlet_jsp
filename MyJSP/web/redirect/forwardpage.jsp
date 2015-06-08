@@ -12,15 +12,15 @@ public void doGet(HttpServletRequest request, HttpServletResponse response, JspW
         String modalita = request.getParameter("modo");
         
         if (modalita.equals("redirect")){
-            response.sendRedirect("destinazione.jsp"); // Non viene passata la richiesta ad altro script. Semplice redirect.
+            response.sendRedirect("destinazione.jsp"); // Non viene passata la richiesta ad altro script. Semplice redirect. Può riferirsi anche a risorse remote, esterne alla context root. (quindi esterne alla web-app corrente)
         }
-        else if (modalita.equals("dispatcher")){
+        else if (modalita.equals("dispatcher")){ // Il dispatcher permette redirect solo all'interno della stessa context root, quindi verso risorse presenti nella stessa web-app.
             //request.setAttribute("chiave", oggetto); // Per condividere dati e valori, si usa il setAttribute() e getAttribute().
-            RequestDispatcher dispatcher = request.getRequestDispatcher("destinazione.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("destinazione.jsp"); // da getServletContext() il percorso dev'essere riferito dalla context root: getServletContext().getRequestDispatcher("/destinazione.jsp");
             dispatcher.forward(request, response);
             // chi riceve userà request.getAttribute("chiave"); per recuperare l'oggetto passato. Appunto si possono passare anche oggetti!
         }else if(modalita.equals("azione_predefinita")){
-            out.println("<font color='red'>Spiacente, l'azione predefinita non può essere invocata in modo procedurale.</font>");
+            out.println("<font color='red'>Spiacente, l'azione predefinita non può essere invocata in modo procedurale da una Dichiarazione!</font>");
             %>
             <%-- <!-- Il forward accetta anche dei parametri param per inviare dati insieme al redirect. Non può essere inserito nel costrutto if di una dichiarazione, verrà eseguito a priori. -->
             <jsp:forward page="destinazione.jsp" > 

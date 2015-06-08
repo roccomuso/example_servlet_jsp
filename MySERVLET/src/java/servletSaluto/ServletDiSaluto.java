@@ -14,6 +14,7 @@ public class ServletDiSaluto extends HttpServlet{
 
     public String myServletParam = null;
     
+    @Override
     public void init(ServletConfig servletConfig) throws ServletException{
         this.myServletParam = servletConfig.getInitParameter("parametro_saluto"); // preso direttamente dal file web.xml della web-app. E associato solamente a questa servlet. E' un parametro di servlet non di contesto.
     }

@@ -23,7 +23,7 @@
             for (Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
                 String name = entry.getKey();
                 String[] value = entry.getValue();
-                out.println(name+" --> "+value[0]);
+                out.println(name+" --> "+value[0]+"<br/>");
             }
         
             // Solo il Dispatcher riesce a reindirizzare una richiesta mantenendo i parametri GET/POST.

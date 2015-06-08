@@ -60,7 +60,7 @@ public class ServletDispatcher extends HttpServlet{
 
     public void includePage(String percorso, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
     
-        // Inlcudiamo al risorsa specificata:
+        // Inlcudiamo la risorsa specificata:
         RequestDispatcher dispatcher = request.getRequestDispatcher(percorso);
         dispatcher.include(request, response);
     

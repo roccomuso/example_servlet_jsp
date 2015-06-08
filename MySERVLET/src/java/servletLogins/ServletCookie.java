@@ -48,6 +48,7 @@ public class ServletCookie extends HttpServlet {
         // LOGOUT (se presente il parametro GET "logout")
         if (request.getParameter("logout") != null)
             cookie = logout(request, response); // logout
+            //cookie[i].setMaxAge(0); // dovrebbe essere ancora più efficace, settando a 0, viene subito eliminato dal client.
         else cookie = request.getCookies();
         
         

@@ -20,6 +20,11 @@
             getServletContext().setAttribute("oggetto_mappa", map); // Impostiamo un attributo d'applicazione
             }
             
+            
+            // non va, perchè B.jsp ha un altro pageContext.
+            String nome = "Pagina A";
+            pageContext.setAttribute("oggetto_pagina", nome);
+            
             out.print("Vai alla <a href='B.jsp'>pagina B</a>.");
         
         %>
